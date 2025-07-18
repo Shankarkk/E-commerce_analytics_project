@@ -6,18 +6,17 @@ This project simulates a real-world e-commerce analytics pipeline using Snowflak
 
 ---
 
-## 🗂️ Project Structure
-
-📦 e_commerce_customer_analytics/
-├── models/
-│   ├── staging/
-│   ├── intermediate/
-│   ├── marts/
-├── snapshots/
-├── tests/
-├── macros/
-├── dbt_project.yml
-├── packages.yml
+## 🗂️ Project Structure  
+📦 e_commerce_customer_analytics/  
+├── models/  
+│   ├── staging/  
+│   ├── intermediate/  
+│   ├── marts/  
+├── snapshots/  
+├── tests/  
+├── macros/  
+├── dbt_project.yml  
+├── packages.yml  
 └── README.md
 
 ---
