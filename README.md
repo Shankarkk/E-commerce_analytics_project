@@ -1,6 +1,6 @@
 # E_commerce_analytics_project
 
-📊 **End-to-End E-commerce Data Analytics with Snowflake + dbt**
+📊 End-to-End E-commerce Data Analytics with Snowflake + dbt**
 
 This project simulates a real-world e-commerce analytics pipeline using Snowflake and dbt. It captures customer behavior, order trends, and payment insights across multiple model layers.
 
@@ -8,13 +8,19 @@ This project simulates a real-world e-commerce analytics pipeline using Snowflak
 
 ## 🗂️ Project Structure
 
-. ├── models │   ├── staging/ │   │   ├── stg_customers.sql │   │   ├── stg_orders.sql │   │   └── stg_payments.sql │   ├── intermediate/ │   │   └── int_orders_with_customers.sql │   └── marts/ │       └── core/ │           └── customer_order_summary.sql ├── macros/ ├── tests/ ├── dbt_project.yml
+📦 e_commerce_customer_analytics/
+├── models/
+│   ├── staging/
+│   ├── intermediate/
+│   ├── marts/
+├── snapshots/
+├── tests/
+├── macros/
+├── dbt_project.yml
+├── packages.yml
+└── README.md
 
 ---
-
-
----
-
 
 ## 📌 Key Features
 
@@ -54,4 +60,3 @@ This project simulates a real-world e-commerce analytics pipeline using Snowflak
 📌 *This project strengthened real-time analytics building skills with dbt + Snowflake stack.*
 
 
----
