@@ -1,4 +1,4 @@
-# E-commerce_analytics_project
+# E_commerce_analytics_project
 
 📊 **End-to-End E-commerce Data Analytics with Snowflake + dbt**
 
