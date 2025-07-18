@@ -6,7 +6,7 @@ This project simulates a real-world e-commerce analytics pipeline using Snowflak
 
 ---
 
-## 🗂️ Project Structure  
+
 📦 e_commerce_customer_analytics/  
 ├── models/  
 │   ├── staging/  
