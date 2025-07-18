@@ -6,17 +6,18 @@ This project simulates a real-world e-commerce analytics pipeline using Snowflak
 
 ---
 
-📦 e_commerce_customer_analytics/  
-├── models/  
-│   ├── staging/              # Raw staging models (customers, orders, products)  
-│   ├── intermediate/         # Business logic models (RFM scoring, aggregations)  
-│   ├── marts/                # Final models used for dashboards and reports  
-├── snapshots/                # Snapshot models if used  
-├── tests/                    # dbt tests (schema + data)  
-├── macros/                   # Jinja macros if applicable  
-├── dbt_project.yml           # dbt project configuration  
-├── packages.yml              # dbt dependencies  
-└── README.md                 # Documentation
+🗂️ Project Structure
+📦 e_commerce_customer_analytics/
+├── models/
+│   ├── staging/            # Raw staging models (customers, orders, products)
+│   ├── intermediate/       # Business logic models (RFM scoring, aggregations)
+│   ├── marts/              # Final models used for dashboards and reports
+├── snapshots/              # Snapshot models if used
+├── tests/                  # dbt tests (schema + data)
+├── macros/                 # Jinja macros if applicable
+├── dbt_project.yml         # dbt project configuration
+├── packages.yml            # dbt dependencies
+└── README.md               # Documentation
 
 ---
 
