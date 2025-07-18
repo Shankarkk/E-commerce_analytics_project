@@ -1,4 +1,4 @@
-# E-commerce_analytics_project
+#E-commerce_analytics_project
 
 📊 **End-to-End E-commerce Data Analytics with Snowflake + dbt**
 
@@ -46,8 +46,8 @@ This project simulates a real-world e-commerce analytics pipeline using Snowflak
 
 ## 🔗 Related Projects
 
-- [`mortgage-psdt`](https://github.com/Shankarkk/mortgage-psdt) – Mortgage post-sanction documentation tracker
-- [`dbt_practice_pro`](https://github.com/Shankarkk/dbt_practice_pro) – Hands-on dbt practice from 45-day training
+-[`mortgage-psdt`](https://github.com/Shankarkk/mortgage-psdt) – Mortgage post-sanction documentation tracker
+-[`dbt_practice_pro`](https://github.com/Shankarkk/dbt_practice_pro) – Hands-on dbt practice from 45-day training
 
 ---
 
