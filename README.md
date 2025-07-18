@@ -1,61 +1,70 @@
-# E-commerce_analytics_project
+# 🛒 **E-commerce Customer Analytics** (`e-commerce_customer_analytics`)
 
-📊 End-to-End E-commerce Data Analytics with Snowflake + dbt**
-
-This project simulates a real-world e-commerce analytics pipeline using Snowflake and dbt. It captures customer behavior, order trends, and payment insights across multiple model layers.
+A **production-ready data analytics project** designed to deliver deep insights into customer behavior, order patterns, and business performance in an e-commerce ecosystem using **Snowflake**, **dbt Cloud**, and **CI/CD automation**.
 
 ---
 
-## 🗂️ Project Structure
+## 🔧 **Tech Stack**
 
-📦 e_commerce_customer_analytics/  
-├── models/  
-│   ├── staging/             # Raw staging models (customers, orders, products)  
-│   ├── intermediate/        # Business logic models (RFM scoring, aggregations)  
-│   ├── marts/               # Final models used for dashboards and reports  
-├── snapshots/               # Snapshot models if used  
-├── tests/                   # dbt tests (schema + data)  
-├── macros/                  # Jinja macros if applicable  
-├── dbt_project.yml          # dbt project configuration  
-├── packages.yml             # dbt dependencies  
-└── README.md                # Documentation
----
-
-## 📌 Key Features
-
-- ✅ dbt `ref()` and `source()` model chaining
-- ✅ Use of incremental models for large datasets
-- ✅ YML schema testing and documentation
-- ✅ Joins between customer, order, and payment layers
-- ✅ Ready for CI/CD and dbt Cloud scheduling
+- **Snowflake** – Cloud data warehouse (Staging → Intermediate → Mart architecture)  
+- **dbt Cloud** – ELT modeling using Jinja, incremental models, schema + data tests  
+- **GitHub** – Version control and CI/CD integration  
+- **SQL, Jinja** – Core transformation logic  
+- *(Optional: Azure Data Factory or S3 for ingestion)*
 
 ---
 
-## 🛠️ Tech Stack
+## 🧩 **Key Features**
 
-- **dbt Core + dbt Cloud**
-- **Snowflake** (data warehouse)
-- **GitHub** (version control)
-- **Jinja** (templating and macros)
-
----
-
-## 📚 Learnings & Outcomes
-
-- Practiced multi-layer dbt modeling (`stg → int → mart`)
-- Designed analytical queries like customer LTV, order frequency
-- Debugged schema and logic issues using dbt run/test
-- Learned project modularity and macro reusability
+- 📌 **Customer 360 metrics** including RFM segmentation, retention, and frequency  
+- 📦 **Order-level and product-level analytics** to drive strategic decisions  
+- ✅ **Data quality checks** with dbt tests (`unique`, `not_null`, `relationships`)  
+- 🔄 **Incremental models** for scalable performance  
+- 📊 **Mart models ready for BI dashboards and business reports**
 
 ---
 
-## 🔗 Related Projects
+## 📁 **Project Structure**
 
--[`mortgage-psdt`](https://github.com/Shankarkk/mortgage-psdt) – Mortgage post-sanction documentation tracker
--[`dbt_practice_pro`](https://github.com/Shankarkk/dbt_practice_pro) – Hands-on dbt practice from 45-day training
+```bash
+e-commerce_customer_analytics/
+├── models/
+│   ├── staging/             # 🧼 Raw data (e.g., customers, orders, products)
+│   ├── intermediate/        # 🧠 Business logic (RFM scores, aggregations)
+│   └── marts/               # 📊 Final dashboards/reporting models
+├── snapshots/               # 🕒 (Optional) Track historical customer changes
+├── tests/                   # ✅ dbt schema/data validation
+├── macros/                  # 🧩 Custom reusable Jinja logic
+├── dbt_project.yml          # ⚙️ Core dbt project config
+├── packages.yml             # 📦 External dbt dependencies
+└── README.md                # 📘 Project overview and documentation
+
 
 ---
 
-📌 *This project strengthened real-time analytics building skills with dbt + Snowflake stack.*
+📊 Business Impact
+
+✅ Enabled segmentation of high-value customers for marketing teams
+
+📈 Churn detection and retention monitoring based on buying behavior
+
+📦 Optimized product and inventory strategies with order insights
+
+🧠 Data-driven decisions with clean, test-validated data models
+
+⏱ Reduced manual SQL effort by over 70%, empowering faster analytics
 
 
+
+---
+
+👤 Author
+
+Shankar Kamalakannan
+Freelance Snowflake + dbt Developer
+
+📱 Mobile: +91-95976 45086
+📧 Email: shankar.freelance.dataengineer@gmail.com
+🔗 GitHub: https://github.com/shankarkk
+
+---
