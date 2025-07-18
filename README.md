@@ -1,66 +1,57 @@
-# E-commerce Analytics Project (End-to-End Data Engineering)
+# E-commerce_analytics_project
 
-## 🔍 Overview
-This project showcases a complete e-commerce analytics pipeline using **Snowflake**, **dbt**, and **GitHub**, built to simulate a real-world online retail environment. It tracks key business metrics like customer orders, product frequency, inventory status, and more.
+📊 **End-to-End E-commerce Data Analytics with Snowflake + dbt**
 
----
-
-## 🛠 Tech Stack
-- **Snowflake** (Data Warehouse)
-- **dbt Cloud & dbt CLI**
-- **GitHub** (Version control)
-- **SQL** (Advanced scripting and logic)
-- **CI/CD Concepts**
-- **Power BI** (explored for dashboard layer)
+This project simulates a real-world e-commerce analytics pipeline using Snowflake and dbt. It captures customer behavior, order trends, and payment insights across multiple model layers.
 
 ---
 
-## 🔄 Project Workflow
+## 🗂️ Project Structure
 
-### ✅ Data Sources:
-- Simulated raw e-commerce data (orders, payments, customers, inventory, etc.)
-- Loaded into Snowflake as staging tables (external file / internal sample)
-
-### 🧱 dbt Layers Implemented:
-1. **Staging Models**: Cleaned raw inputs with naming conventions & columns standardization  
-2. **Intermediate Models**: Business logic joins (orders with customers, product revenue, etc.)  
-3. **Mart Models**: Final KPIs like:
-   - Monthly & Weekly Sales Trend
-   - Top-Selling Products
-   - Repeat Customers
-   - Low Inventory Products
-   - Region-wise performance
-
-### 🧪 Tests & Validations:
-- dbt schema tests (`not null`, `unique`, `accepted_values`)
-- Source freshness tests
-- Manual data validation via Snowflake UI
+. ├── models │   ├── staging/ │   │   ├── stg_customers.sql │   │   ├── stg_orders.sql │   │   └── stg_payments.sql │   ├── intermediate/ │   │   └── int_orders_with_customers.sql │   └── marts/ │       └── core/ │           └── customer_order_summary.sql ├── macros/ ├── tests/ ├── dbt_project.yml
 
 ---
 
-## 🔁 CI/CD & GitHub Integration:
-- Project initialized in dbt Cloud
-- Connected with GitHub repo
-- Branch creation, PR review, and merge flow tested
-- Jobs created for dbt run, test & docs generation
 
 ---
 
-## 📊 Dashboard Layer (Exploration):
-- Explored Power BI for dashboarding on top of Snowflake
-- Analyzed product performance, inventory, and order trends
-- Also familiar with bank-like dashboards showing business KPIs, pending orders, etc.
+
+## 📌 Key Features
+
+- ✅ dbt `ref()` and `source()` model chaining
+- ✅ Use of incremental models for large datasets
+- ✅ YML schema testing and documentation
+- ✅ Joins between customer, order, and payment layers
+- ✅ Ready for CI/CD and dbt Cloud scheduling
 
 ---
 
-## 💥 Key Impact
-- Demonstrates end-to-end data engineering for analytics use cases
-- Hands-on with **dbt development + GitHub branching + Snowflake optimization**
-- Applied real-world business logic (repeat buyers, monthly trends, product ranks)
-- Confident with integration troubleshooting and test-first development
+## 🛠️ Tech Stack
+
+- **dbt Core + dbt Cloud**
+- **Snowflake** (data warehouse)
+- **GitHub** (version control)
+- **Jinja** (templating and macros)
 
 ---
 
-## 🔗 Author
-**Shankar Kamalakannan**  
-[LinkedIn](https://www.linkedin.com/in/shankar-kamalakannan-kk) | GitHub: [Shankarkk](https://github.com/Shankarkk)
+## 📚 Learnings & Outcomes
+
+- Practiced multi-layer dbt modeling (`stg → int → mart`)
+- Designed analytical queries like customer LTV, order frequency
+- Debugged schema and logic issues using dbt run/test
+- Learned project modularity and macro reusability
+
+---
+
+## 🔗 Related Projects
+
+- [`mortgage-psdt`](https://github.com/Shankarkk/mortgage-psdt) – Mortgage post-sanction documentation tracker
+- [`dbt_practice_pro`](https://github.com/Shankarkk/dbt_practice_pro) – Hands-on dbt practice from 45-day training
+
+---
+
+📌 *This project strengthened real-time analytics building skills with dbt + Snowflake stack.*
+
+
+---
