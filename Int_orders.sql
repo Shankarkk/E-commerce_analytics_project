@@ -1,4 +1,4 @@
---path:models/intermediate/int_orders
+--path:intermediate/int_orders
 {{ config(
     materialized = 'view',
     tags = ['intermediate']
