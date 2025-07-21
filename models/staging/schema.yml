@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Staging model for customers data
+    columns:
+      - name: customer_id
+        description: Unique identifier for the customer
+        tests:
+          - not_null
+          - unique
+
+      - name: first_name
+        description: First name of the customer
+
+      - name: last_name
+        description: Last name of the customer
+
+      - name: email
+        description: Email address of the customer
+
+      - name: gender
+        description: Gender of the customer
+        tests:
+          - accepted_values:
+              values: ['male', 'female', 'other']
+              quote: true
+
+      - name: customer_created_at
+        description: Timestamp when the customer was created
+
+      - name: customer_updated_at
+        description: Timestamp when the customer was last updated
+
+  - name: stg_orders
+    description: Staging model for orders data
+    columns:
+      - name: order_id
+        description: Unique identifier for the order
+        tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: Foreign key to the customer
+
+      - name: order_date
+        description: Date when the order was placed
+
+      - name: status
+        description: Status of the order
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['placed', 'shipped', 'completed', 'cancelled']
+              quote: true
+
+      - name: total_amount
+        description: Total amount of the order
+
+  - name: stg_payments
+    description: Staging model for payments data
+    columns:
+      - name: payment_id
+        description: Unique identifier for the payment
+        tests:
+          - not_null
+          - unique
+
+      - name: order_id
+        description: Foreign key to the order
+
+      - name: payment_method
+        description: Method of payment
+        tests:
+          - accepted_values:
+              values: ['credit_card', 'debit_card', 'paypal', 'upi']
+              quote: true
+
+      - name: amount
+        description: Payment amount
+
+      - name: payment_status
+        description: Status of payment
+        tests:
+          - accepted_values:
+              values: ['paid', 'failed', 'refunded']
+              quote: true
