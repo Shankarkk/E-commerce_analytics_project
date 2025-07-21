@@ -1,4 +1,4 @@
--- Path: models/staging/stg_payments.sql
+-- Path:staging/stg_payments.sql
 {{ config(materialized='view', tags=['staging']) }}
 
 with stg_payments as (
