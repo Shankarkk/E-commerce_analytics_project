@@ -54,8 +54,6 @@ e-commerce_customer_analytics/
 
 ⏱ Reduced manual SQL effort by over 70%, empowering faster analytics
 
-
-
 ---
 
 ### 🔍 Interview Readiness Summary
@@ -65,6 +63,33 @@ e-commerce_customer_analytics/
 ✅ Includes staging → intermediate → mart model flow  
 ✅ dbt tests applied: `not_null`, `unique`, `accepted_values`  
 🚀 CI/CD + data quality handled via dbt Cloud, GitHub, and Slack/email alerting
+
+---
+
+## 🎯 Highlight: Top Customers Mart Model
+
+The `mart_top_customers` model identifies the **top 20 most valuable customers** using RFM scoring and contribution ranking. It tags each customer with:
+
+- `customer_activity_status`: Active / Highly Active / Inactive
+- `customer_value_segment`: High Value / Low Value
+
+📈 This model helps the marketing and sales team prioritize **high-value, highly active customers**, improving retention and campaign targeting.
+
+🔎 **Source model**: `int_rfm_ranked`
+
+---
+
+## 📦 Highlight: Product Insights Mart Model *(Coming Soon)*
+
+The `mart_best_selling_products` model will summarize **top-selling products by quantity and revenue**, enabling:
+
+- 📦 Better inventory planning
+- 🛍️ Product bundling and promotion
+- ❌ Low-performing item identification
+
+🔎 **Source model**: `int_order_product_agg`
+
+---
 
 👤 Author
 
