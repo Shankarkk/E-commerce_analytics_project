@@ -1,4 +1,4 @@
--- Path: models/staging/stg_order.sql
+-- Path:staging/stg_orders.sql
 {{ config(materialized='view', tags=['staging']) }}
 
 with stg_orders as (
