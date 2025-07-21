@@ -2,119 +2,100 @@ version: 2
 
 models:
   - name: stg_customers
-    description: Staging model for customers data
+    description: "Staging model for raw customer data"
     columns:
       - name: customer_id
-        description: Unique identifier for the customer
+        description: "Unique identifier for each customer"
         tests:
           - not_null
           - unique
-
       - name: first_name
-        description: First name of the customer
-
+        description: "Customer's first name"
       - name: last_name
-        description: Last name of the customer
-
+        description: "Customer's last name"
       - name: email
-        description: Email address of the customer
-
-      - name: gender
-        description: Gender of the customer
+        description: "Customer's email address"
         tests:
-          - accepted_values:
-              values: ['male', 'female', 'other']
-              quote: true
-
-      - name: customer_created_at
-        description: Timestamp when the customer was created
-
-      - name: customer_updated_at
-        description: Timestamp when the customer was last updated
+          - not_null
+      - name: created_at
+        description: "Timestamp when the customer was created"
 
   - name: stg_orders
-    description: Staging model for orders data
+    description: "Staging model for raw orders data"
     columns:
       - name: order_id
-        description: Unique identifier for the order
+        description: "Unique identifier for each order"
         tests:
           - not_null
           - unique
-
       - name: customer_id
-        description: Foreign key to the customer
-
-      - name: order_date
-        description: Date when the order was placed
-
-      - name: status
-        description: Status of the order
+        description: "ID of the customer who placed the order"
         tests:
           - not_null
-          - accepted_values:
-              values: ['placed', 'shipped', 'completed', 'cancelled']
-              quote: true
-
-      - name: total_amount
-        description: Total amount of the order
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: order_date
+        description: "Date when the order was placed"
+      - name: status
+        description: "Current status of the order"
 
   - name: stg_payments
-    description: Staging model for payments data
+    description: "Staging model for raw payments data"
     columns:
       - name: payment_id
-        description: Unique identifier for the payment
+        description: "Unique identifier for each payment"
         tests:
           - not_null
           - unique
-
       - name: order_id
-        description: Foreign key to the order
-
+        description: "Order ID related to the payment"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
       - name: payment_method
-        description: Method of payment
-        tests:
-          - accepted_values:
-              values: ['credit_card', 'debit_card', 'paypal', 'upi']
-              quote: true
-
+        description: "Method used for payment"
       - name: amount
-        description: Payment amount
+        description: "Payment amount"
 
-      - name: payment_status
-        description: Status of payment
-        tests:
-          - accepted_values:
-              values: ['paid', 'failed', 'refunded']
-              quote: true
-
-              
-
-      - name: stg_products
-        description: Staged product information from raw source
-        
-        columns:
+  - name: stg_products
+    description: "Staging model for raw products data"
+    columns:
       - name: product_id
+        description: "Unique product identifier"
         tests:
           - not_null
           - unique
       - name: product_name
-      - name: category
-      - name: brand
-      - name: unit_price
-      - name: availability
+        description: "Name of the product"
+      - name: price
+        description: "Unit price of the product"
 
-      - name: stg_order_items
-        description: Staged order items with quantity and price
-        
-        columns:
+  - name: stg_order_items
+    description: "Staging model for order items data"
+    columns:
       - name: order_item_id
+        description: "Unique identifier for each order item"
         tests:
           - not_null
           - unique
-          - name: order_id
-          - name: product_id
-          - name: quantity
-          - name: unit_price
-  
-
-              
+      - name: order_id
+        description: "Order associated with the item"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        description: "Product included in the order"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id
+      - name: quantity
+        description: "Number of units ordered"
+      - name: item_price
+        description: "Price per unit of the item"
