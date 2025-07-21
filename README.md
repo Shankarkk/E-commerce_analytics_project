@@ -39,7 +39,6 @@ e-commerce_customer_analytics/
 ├── packages.yml             # 📦 External dbt dependencies
 └── README.md                # 📘 Project overview and documentation
 
-
 ---
 
 📊 Business Impact
@@ -53,16 +52,6 @@ e-commerce_customer_analytics/
 🧠 Data-driven decisions with clean, test-validated data models
 
 ⏱ Reduced manual SQL effort by over 70%, empowering faster analytics
-
----
-
-### 🔍 Interview Readiness Summary
-
-🟢 **Immediate Joiner** – Available for full-time or contract roles  
-🛠️ Real-time freelance delivery using Snowflake + dbt  
-✅ Includes staging → intermediate → mart model flow  
-✅ dbt tests applied: `not_null`, `unique`, `accepted_values`  
-🚀 CI/CD + data quality handled via dbt Cloud, GitHub, and Slack/email alerting
 
 ---
 
@@ -88,6 +77,16 @@ The `mart_best_selling_products` model will summarize **top-selling products by 
 - ❌ Low-performing item identification
 
 🔎 **Source model**: `int_order_product_agg`
+
+---
+
+### 🔍 Interview Readiness Summary
+
+🟢 **Immediate Joiner** – Available for full-time or contract roles  
+🛠️ Real-time freelance delivery using Snowflake + dbt  
+✅ Includes staging → intermediate → mart model flow  
+✅ dbt tests applied: `not_null`, `unique`, `accepted_values`  
+🚀 CI/CD + data quality handled via dbt Cloud, GitHub, and Slack/email alerting
 
 ---
 
