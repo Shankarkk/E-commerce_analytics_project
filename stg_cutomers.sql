@@ -1,4 +1,4 @@
-models/staging/stg_customers.sql
+staging/stg_customers.sql
 {{ config(materialized='view', tags=['staging']) }}
 
 with stg_customers as (
