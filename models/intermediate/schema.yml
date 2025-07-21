@@ -2,45 +2,71 @@ version: 2
 
 models:
   - name: int_orders
-    description: "Intermediate model combining order and customer data for further aggregation."
+    description: Cleans and enriches raw orders data with additional computed fields
     columns:
-      - name: customer_id
-        description: "Unique identifier for each customer"
-        tests:
-          - not_null
       - name: order_id
-        description: "Unique order ID"
-
-  - name: int_rfm
-    description: "Calculates RFM metrics for each customer"
-    columns:
-      - name: customer_id
-        description: "Unique customer identifier"
+        description: Unique identifier for the order
         tests:
           - not_null
-      - name: most_recent_order
-        description: "Most recent order date"
+          - unique
+
+      - name: customer_id
+        description: Customer placing the order
+        tests:
+          - not_null
+
+      - name: order_date
+        description: Date of the order
+        tests:
+          - not_null
+
+      - name: order_amount
+        description: Total amount of the order
+        tests:
+          - not_null
+
+  - name: int_rfm_calculated
+    description: Calculates RFM metrics (Recency, Frequency, Monetary) for each customer
+    columns:
+      - name: customer_id
+        description: Unique customer identifier
+        tests:
+          - not_null
+          - unique
+
+      - name: last_order_date
+        description: Most recent order date for the customer
+        tests:
+          - not_null
+
       - name: recency
-        description: "Days since the last order"
+        description: Days since last order
+        tests:
+          - not_null
+
       - name: frequency
-        description: "Total number of orders"
-      - name: contribution
-        description: "Total order amount (monetary)"
+        description: Number of orders placed by the customer
+        tests:
+          - not_null
+
+      - name: monetary
+        description: Total amount spent by the customer
+        tests:
+          - not_null
 
   - name: int_rfm_ranked
-    description: "Ranks customers based on contribution (monetary value)"
+    description: Adds ranking to customers based on monetary contribution using row_number
     columns:
       - name: customer_id
-        description: "Unique customer identifier"
+        description: Unique customer identifier
         tests:
           - not_null
-      - name: most_recent_order
-        description: "Most recent order date"
-      - name: recency
-        description: "Days since the last order"
-      - name: frequency
-        description: "Total number of orders"
+          - unique
+
       - name: contribution
-        description: "Total order amount"
+        description: Monetary value used for ranking
+
       - name: rno
-        description: "Row number based on contribution"
+        description: Row number of the customer based on descending contribution
+        tests:
+          - not_null
