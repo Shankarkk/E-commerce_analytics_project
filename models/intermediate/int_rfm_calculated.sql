@@ -1,4 +1,4 @@
--- models/intermediate/int_rfm.sql
+-- models/intermediate/int_rfm_calculated.sql
 
 with customer_orders as (
     select
