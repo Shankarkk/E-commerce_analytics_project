@@ -86,3 +86,35 @@ models:
           - accepted_values:
               values: ['paid', 'failed', 'refunded']
               quote: true
+
+              
+
+      - name: stg_products
+        description: Staged product information from raw source
+        
+        columns:
+      - name: product_id
+        tests:
+          - not_null
+          - unique
+      - name: product_name
+      - name: category
+      - name: brand
+      - name: unit_price
+      - name: availability
+
+      - name: stg_order_items
+        description: Staged order items with quantity and price
+        
+        columns:
+      - name: order_item_id
+        tests:
+          - not_null
+          - unique
+          - name: order_id
+          - name: product_id
+          - name: quantity
+          - name: unit_price
+  
+
+              
