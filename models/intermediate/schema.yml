@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: int_orders
+    description: "Intermediate model combining order and customer data for further aggregation."
+    columns:
+      - name: customer_id
+        description: "Unique identifier for each customer"
+        tests:
+          - not_null
+      - name: order_id
+        description: "Unique order ID"
+
+  - name: int_rfm
+    description: "Calculates RFM metrics for each customer"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - not_null
+      - name: most_recent_order
+        description: "Most recent order date"
+      - name: recency
+        description: "Days since the last order"
+      - name: frequency
+        description: "Total number of orders"
+      - name: contribution
+        description: "Total order amount (monetary)"
+
+  - name: int_rfm_ranked
+    description: "Ranks customers based on contribution (monetary value)"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - not_null
+      - name: most_recent_order
+        description: "Most recent order date"
+      - name: recency
+        description: "Days since the last order"
+      - name: frequency
+        description: "Total number of orders"
+      - name: contribution
+        description: "Total order amount"
+      - name: rno
+        description: "Row number based on contribution"
