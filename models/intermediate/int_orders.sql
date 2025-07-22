@@ -1,6 +1,7 @@
 {{ config(
-    materialized = 'view',
-    tags = ['intermediate']
+    materialized='table',
+    unique_key='order_id',
+    tags=['intermediate']
 ) }}
 
 -- Step 1: Join raw customer and order data
