@@ -1,6 +1,7 @@
 {{ config(
     materialized='table',
-    unique_key=['customer_id', 'product_id']
+    unique_key=['customer_id', 'product_id'],
+    tags=['intermediate']
 ) }}
     
 with order_items as (
