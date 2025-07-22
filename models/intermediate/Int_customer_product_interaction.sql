@@ -1,3 +1,8 @@
+{{ config(
+    materialized='table',
+    unique_key=['customer_id', 'product_id']
+) }}
+    
 with order_items as (
 
     select 
