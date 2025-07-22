@@ -1,102 +1,181 @@
-# 🛒 **E-commerce Customer Analytics** (`e-commerce_customer_analytics`)
+🛍️ E-commerce Analytics Project with dbt + Snowflake
 
-A **production-ready data analytics project** designed to deliver deep insights into customer behavior, order patterns, and business performance in an e-commerce ecosystem using **Snowflake**, **dbt Cloud**, and **CI/CD automation**.
+This project focuses on building a scalable, modular analytics pipeline using dbt (Data Build Tool) on Snowflake for a hypothetical e-commerce platform. It transforms raw customer, order, and product data into actionable insights through RFM segmentation, churn analysis, and behavioral profiling.
 
----
-
-## 🔧 **Tech Stack**
-
-- **Snowflake** – Cloud data warehouse (Staging → Intermediate → Mart architecture)  
-- **dbt Cloud** – ELT modeling using Jinja, incremental models, schema + data tests  
-- **GitHub** – Version control and CI/CD integration  
-- **SQL, Jinja** – Core transformation logic  
-- *(Optional: Azure Data Factory or S3 for ingestion)*
 
 ---
 
-## 🧩 **Key Features**
+📁 Project Structure
 
-- 📌 **Customer 360 metrics** including RFM segmentation, retention, and frequency  
-- 📦 **Order-level and product-level analytics** to drive strategic decisions  
-- ✅ **Data quality checks** with dbt tests (`unique`, `not_null`, `relationships`)  
-- 🔄 **Incremental models** for scalable performance  
-- 📊 **Mart models ready for BI dashboards and business reports**
-
----
-
-## 📁 **Project Structure**
-
-```bash
-e-commerce_customer_analytics/
+e_commerce_analytics/
 ├── models/
-│   ├── staging/             # 🧼 Raw data (e.g., customers, orders, products)
-│   ├── intermediate/        # 🧠 Business logic (RFM scores, aggregations)
-│   └── marts/               # 📊 Final dashboards/reporting models
-├── snapshots/               # 🕒 (Optional) Track historical customer changes
-├── tests/                   # ✅ dbt schema/data validation
-├── macros/                  # 🧩 Custom reusable Jinja logic
-├── dbt_project.yml          # ⚙️ Core dbt project config
-├── packages.yml             # 📦 External dbt dependencies
-└── README.md                # 📘 Project overview and documentation
+│   ├── staging/                # Raw data cleaning & type casting
+│   │   ├── stg_customers.sql
+│   │   ├── stg_orders.sql
+│   │   └── stg_payments.sql
+│   │
+│   ├── intermediate/          # Business logic transformation
+│   │   ├── int_order_payments.sql
+│   │   ├── int_customer_orders.sql
+│   │   └── int_rfm_ranked_customers.sql
+│   │
+│   ├── marts/                 # Final reporting models
+│   │   ├── customer_segmentation_mart.sql
+│   │   └── top_customers_mart.sql
+│
+├── snapshots/                 # (Optional) Snapshots for SCD tracking
+│
+├── dbt_project.yml            # Project-level configuration
+└── README.md                  # Project documentation (this file)
+
 
 ---
 
-📊 Business Impact
+🧠 Business Goals
 
-✅ Enabled segmentation of high-value customers for marketing teams
+Track customer behavior based on recency, frequency, and monetary metrics.
 
-📈 Churn detection and retention monitoring based on buying behavior
+Identify customer churn early to take retention action.
 
-📦 Optimized product and inventory strategies with order insights
+Segment customers into actionable groups (e.g., loyal, high spender).
 
-🧠 Data-driven decisions with clean, test-validated data models
+Identify top contributing customers.
 
-⏱ Reduced manual SQL effort by over 70%, empowering faster analytics
 
----
-
-## 🎯 Highlight: Top Customers Mart Model
-
-The `mart_top_customers` model identifies the **top 20 most valuable customers** using RFM scoring and contribution ranking. It tags each customer with:
-
-- `customer_activity_status`: Active / Highly Active / Inactive
-- `customer_value_segment`: High Value / Low Value
-
-📈 This model helps the marketing and sales team prioritize **high-value, highly active customers**, improving retention and campaign targeting.
-
-🔎 **Source model**: `int_rfm_ranked`
 
 ---
 
-## 📦 Highlight: Product Insights Mart Model *(Coming Soon)*
+🔄 Data Flow
 
-The `mart_best_selling_products` model will summarize **top-selling products by quantity and revenue**, enabling:
+Source Tables (assumed loaded into Snowflake):
 
-- 📦 Better inventory planning
-- 🛍️ Product bundling and promotion
-- ❌ Low-performing item identification
+raw_customers
 
-🔎 **Source model**: `int_order_product_agg`
+raw_orders
+
+raw_payments
+
+
+1. Staging Layer (stg_*)
+
+Clean column names
+
+Convert date formats
+
+Standardize data types
+
+Filter invalid records if any
+
+
+2. Intermediate Layer (int_*)
+
+Join orders with payments
+
+Calculate total spend, number of orders per customer
+
+Derive RFM (Recency, Frequency, Monetary) scores and rankings
+
+
+3. Marts Layer (*_mart)
+
+Final outputs used by dashboards & business teams
+
+Includes:
+
+customer_segmentation_mart: RFM + churn + behavior logic
+
+top_customers_mart: Top 20 customers ranked by contribution
+
+
+
 
 ---
 
-### 🔍 Interview Readiness Summary
+📊 Model Descriptions
 
-🟢 **Immediate Joiner** – Available for full-time or contract roles  
-🛠️ Real-time freelance delivery using Snowflake + dbt  
-✅ Includes staging → intermediate → mart model flow  
-✅ dbt tests applied: `not_null`, `unique`, `accepted_values`  
-🚀 CI/CD + data quality handled via dbt Cloud, GitHub, and Slack/email alerting
+✅ customer_segmentation_mart.sql
+
+RFM scoring and segmentation
+
+Churn logic based on recency
+
+Behavioral segmentation based on frequency & spend
+
+Combined segment (e.g., Active - High Spender)
+
+
+> Config:
+
+
+
+{{ config(
+    materialized='table',
+    schema='marts',
+    tags=['customer_segmentation', 'rfm', 'churn_analysis']
+) }}
+
+
+---
+
+✅ top_customers_mart.sql
+
+Ranks customers based on total contribution
+
+Extracts Top 20
+
+Adds customer activity (recency-based) and value (monetary) segments
+
+Includes combined_segment column for easy grouping
+
+
+> Config:
+
+
+
+{{ config(
+    materialized='table',
+    schema='marts',
+    tags=['top_customers', 'rfm', 'ranking']
+) }}
+
+
+---
+
+🧪 Tests & Validations
+
+dbt tests for:
+
+not_null
+
+unique on customer_id
+
+Value range checks on recency, frequency, monetary
+
+
+UAT was conducted at every layer before promotion to marts
+
+
+
+---
+
+📌 Assumptions
+
+Data is already ingested into Snowflake from upstream sources like S3/ADF.
+
+All monetary values are in the same currency.
+
+Recency is calculated using current_date - last_order_date.
+
+
 
 ---
 
 👤 Author
 
 Shankar Kamalakannan
-Freelance Snowflake + dbt Developer
+Snowflake | dbt | Cloud Data Engineer
+📧 shankar@example.com
+🔗 GitHub: Shankarkk
 
-📱 Mobile: +91-95976 45086
-📧 Email: shankar.freelance.dataengineer@gmail.com
-🔗 GitHub: https://github.com/shankarkk
 
 ---
