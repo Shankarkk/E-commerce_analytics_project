@@ -2,7 +2,8 @@
 
 {{ config(
     materialized='table',
-    tags=['mart', 'segmentation']
+    schema='marts',
+    tags=['customer_segmentation', 'rfm', 'churn_analysis']
 ) }}
 
 with rfm_data as (
