@@ -1,135 +1,82 @@
-# 🛍️ E-Commerce Customer Analytics (dbt + Snowflake)
+# 🛍️ E-commerce Customer Analytics Project
 
-> **Project Type:** Analytics Engineering  
-> **Tech Stack:** Snowflake | dbt | GitHub  
-> **Domain:** E-Commerce Customer Segmentation
+A real-world data pipeline project built using Snowflake and dbt, focusing on customer behavior, order trends, and business-focused analytics.
+
+---
+
+## 🎯 Objective
+
+To deliver actionable insights into customer retention, repeat purchases, and lifetime value using a modular and scalable analytics pipeline powered by dbt on Snowflake.
 
 ---
 
 ## 📁 Project Structure
 
-```text
-e_commerce_customer_analytics/
-├── models/
-│   ├── staging/             # Raw data cleaned and standardized
-│   │   ├── stg_customers.sql
-│   │   ├── stg_orders.sql
-│   │   └── stg_payments.sql
-│   │
-│   ├── intermediate/        # Business logic & transformations
-│   │   ├── int_order_metrics.sql
-│   │   ├── int_rfm_calculation.sql
-│   │   └── int_rfm_ranked.sql
-│   │
-│   └── marts/               # Final models for reporting
-│       └── top_customers.sql
-│
-├── snapshots/               # (Optional) Historical data tracking
-├── dbt_project.yml
-└── README.md
-
+e_commerce_customer_analytics/ │ ├── models/ │   ├── staging/             # Raw source layer (orders, customers, products) │   ├── intermediate/        # Business logic layer (RFM, joins, aggregations) │   ├── marts/               # Final analytics-ready tables │ ├── snapshots/               # Snapshot setup (for future SCD tracking) │ ├── dbt_project.yml          # Project config ├── README.md                # Project documentation
 
 ---
 
-🔄 ELT Workflow
+## 🧠 Use Cases Covered
 
-[ Raw Tables (Snowflake) ]
-        │
-        ▼
-[ staging/ ]
-        │
-        ▼
-[ intermediate/ ]
-        │
-        ▼
-[ marts/ ]
-        │
-        ▼
-[ Dashboard / Reporting ]
-
+- RFM (Recency, Frequency, Monetary) Scoring
+- Repeat vs First-time Customer Analysis
+- Top N Customers by Lifetime Value
+- Weekly and Monthly Revenue Trends
+- Customer Purchase Gap & Retention Pattern
+- Active vs Inactive Customer Segmentation
 
 ---
 
-🔍 Final Mart: Top 20 Customers
+## 📆 Time-Based Logic Applied
 
--- model: top_customers.sql
-with ranked as (
-  select * from {{ ref('int_rfm_ranked') }}
-  where rno <= 20
-)
-
-select
-  customer_id,
-  contribution,
-  recency,
-  frequency,
-  monetary,
-  rno,
-  case
-    when recency <= 7 then 'Highly Active'
-    when recency between 8 and 30 then 'Active'
-    else 'Inactive'
-  end as customer_activity_status,
-  case
-    when contribution >= 1000 then 'High Value'
-    else 'Low Value'
-  end as customer_value_segment,
-  customer_activity_status || ' - ' || customer_value_segment as combined_segment
-from ranked
-
-> 💡 Business Insight: This mart helps identify high-value customers based on RFM metrics and activity recency, supporting strategic targeting and loyalty campaigns.
-
-
-
+- `DATE_TRUNC()` used for week/month slicing
+- `LAG()` applied for calculating gaps between purchases
+- Order filters using date ranges (`BETWEEN`, `>`, `<=`)
+- Current active customers derived using date diff logic
 
 ---
 
-📊 Sample Output
+## ⚙️ dbt Features & Configuration
 
-customer_id	contribution	recency	frequency	monetary	rno	customer_activity_status	customer_value_segment	combined_segment
-
-CUST101	1400	3	10	140	1	Highly Active	High Value	Highly Active - High Value
-CUST107	900	20	6	150	6	Active	Low Value	Active - Low Value
-
-
-
----
-
-🧪 Testing & Validation
-
-✅ Layer-wise dbt tests added
-✅ Each intermediate and mart model has unique / not null tests
-✅ Validation done at UAT stage before productionizing
-
+- `incremental` materialization for scalable builds
+- Unique key definitions for merge logic
+- Data tests (`not_null`, `unique`, `relationships`) added
+- Snapshot scaffolding for future SCD tracking
+- Modular structure aligned with best practices (`staging → intermediate → marts`)
 
 ---
 
-🚀 Future Enhancements
+## 🧾 Snapshots Setup
 
-> ⬛️ You can extend this project with:
-
-
-
-🗓️ Weekly/Monthly aggregates
-
-🛍️ Product-wise and category-level RFM analysis
-
-📈 Campaign performance segmentation
-
-🧾 Snapshot testing (using snapshots/)
-
-🔁 CI/CD integration (dbt Cloud or GitHub Actions)
-
-
+- Folder created under `/snapshots/`
+- Future plan:
+  - Track slowly changing customer/product attributes
+  - Maintain historical views using SCD Type 2
+  - Add `dbt snapshot` logic when SCD changes are required
 
 ---
 
-👨‍💻 Author
+## 📌 Future Enhancements
 
-Shankar Kamalakannan
-Snowflake | dbt | Cloud Data Engineering
-📧 [your-email@example.com]
-🔗 [LinkedIn / Portfolio links optional]
-
+- Product category-level performance tracking
+- Campaign and marketing dashboard integration
+- Advanced customer segmentation using clustering
+- CI/CD pipeline using dbt Cloud + GitHub Actions
+- Integration with Metabase/Tableau for visualization
 
 ---
+
+## 🛠️ Tools & Technologies
+
+| Area                  | Tool / Platform      |
+|-----------------------|----------------------|
+| Data Warehouse        | Snowflake            |
+| Transformation Logic  | dbt (Core)           |
+| Version Control       | GitHub               |
+| Visualization (opt.)  | Metabase / Tableau   |
+
+---
+
+## 🙌 Credits
+
+Project developed as part of a real-time portfolio to demonstrate cloud data engineering skills using dbt and Snowflake in an e-commerce analytics context.
