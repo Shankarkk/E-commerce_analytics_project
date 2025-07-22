@@ -62,3 +62,22 @@ models:
       - name: total_revenue
         tests:
           - not_null
+
+  - name: int_customer_product_interaction
+    description: "Captures product-level engagement for each customer – total orders, quantity, and spend."
+    columns:
+      - name: customer_id
+        tests:
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: total_orders
+        tests:
+          - not_null
+      - name: total_quantity
+        tests:
+          - not_null
+      - name: total_spent_on_product
+        tests:
+          - not_null
