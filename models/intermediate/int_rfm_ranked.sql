@@ -1,4 +1,9 @@
--- models/intermediate/int_rfm_ranked.sql
+{{ config(
+    materialized='table',
+    unique_key='customer_id',
+    tags=['intermediate']
+) }}
+
 
 with rfm as (
     select
