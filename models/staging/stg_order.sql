@@ -1,6 +1,4 @@
-
 {{ config(materialized='view', tags=['staging']) }}
-
 with stg_orders as (
     select 
         order_id,
