@@ -1,5 +1,4 @@
 {{ config(materialized='view', tags=['staging']) }}
-
 with stg_payments as (
     select 
         payment_id,
