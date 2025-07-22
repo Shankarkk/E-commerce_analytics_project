@@ -1,4 +1,8 @@
--- models/intermediate/int_rfm_calculated.sql
+{{ config(
+    materialized='table',
+    unique_key='customer_id',
+    tags=['intermediate']
+) }}
 
 with customer_orders as (
     select
