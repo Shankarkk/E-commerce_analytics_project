@@ -4,7 +4,7 @@
     tags=['intermediate']
 ) }}
 
--- Step 1: Join raw customer and order data
+-- Step 1: Join raw customer and order data.
 with int_orders as (
 
     select
@@ -22,7 +22,7 @@ with int_orders as (
 
 ),
 
--- Step 2: Clean the order status values
+-- Step 2: Clean the order status values.
 cleaned as (
 
     select
