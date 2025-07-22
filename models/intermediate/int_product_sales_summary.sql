@@ -1,3 +1,8 @@
+{{ config(
+    materialized='table',
+    unique_key='product_id'
+) }}
+    
 WITH product_sales AS (
     SELECT
         p.product_id,
