@@ -1,104 +1,135 @@
-# 🛒 E-commerce Customer Analytics Project
-e_commerce_customer_analytics/ ├── models/ │   ├── staging/             # Raw staging models (customers, orders, products) │   ├── intermediate/        # Business logic models (RFM scoring, aggregations) │   ├── marts/               # Final models for segmentation, top customers │ ├── snapshots/               # Optional: Snapshot models for SCD handling ├── macros/                  # Reusable macros (e.g., percent_rank, days_diff) ├── tests/                   # Data quality & schema tests ├── dbt_project.yml
+# 🛍️ E-Commerce Customer Analytics (dbt + Snowflake)
+
+> **Project Type:** Analytics Engineering  
+> **Tech Stack:** Snowflake | dbt | GitHub  
+> **Domain:** E-Commerce Customer Segmentation
 
 ---
 
-## 📊 Use Case Summary
+## 📁 Project Structure
 
-**Business Scenario**:  
-E-commerce company wants to track and analyze customer behavior using RFM (Recency, Frequency, Monetary) model, identify top customers, and detect churn risk segments.
+```text
+e_commerce_customer_analytics/
+├── models/
+│   ├── staging/             # Raw data cleaned and standardized
+│   │   ├── stg_customers.sql
+│   │   ├── stg_orders.sql
+│   │   └── stg_payments.sql
+│   │
+│   ├── intermediate/        # Business logic & transformations
+│   │   ├── int_order_metrics.sql
+│   │   ├── int_rfm_calculation.sql
+│   │   └── int_rfm_ranked.sql
+│   │
+│   └── marts/               # Final models for reporting
+│       └── top_customers.sql
+│
+├── snapshots/               # (Optional) Historical data tracking
+├── dbt_project.yml
+└── README.md
 
----
-
-## ⚙️ Model Flow Overview
-
-Raw → Staging → Intermediate → Mart
-
-### 1. **Staging Layer**
-- Cleanses and standardizes data from `customers`, `orders`, `products`.
-
-### 2. **Intermediate Layer**
-- Calculates:
-  - `recency`, `frequency`, `monetary` per customer
-  - `rfm_score` & `ranking`
-  
-### 3. **Mart Layer**
-- Combines all logic for business reporting:
-  - `customer_segmentation_mart.sql`: RFM, churn, behavioral segments
-  - `top_customers_mart.sql`: Top 20 contributors, active status
-
----
-
-## 📌 Key Features
-
-| Feature                          | Included   |
-|----------------------------------|----------
-| 🔢 RFM Score Computation         | ✅        |
-| 🧠 Behavioral Segmentation       | ✅        |
-| 🔁 Churn Status Tagging          | ✅        |
-| ⭐ Top Customer Identification   | ✅        |
-| 📦 Data Quality Tests            | ✅        |
-| 📸 Snapshots (SCD Ready)         | ✅ Optional |
-| 🧩 Custom Macros                 | ✅        |
-| 🔁 Incremental Model Logic       | ✅ (If needed) |
-| 🚀 CI/CD via GitHub Actions      | ✅ Optional |
 
 ---
 
-## 🧠 Sample Business Questions Answered
+🔄 ELT Workflow
 
-- Who are the **top 20 high-value customers**?
-- Which customers are **churned** or **at risk**?
-- How many customers are **loyal high spenders**?
-- What’s the RFM segment of each customer?
+[ Raw Tables (Snowflake) ]
+        │
+        ▼
+[ staging/ ]
+        │
+        ▼
+[ intermediate/ ]
+        │
+        ▼
+[ marts/ ]
+        │
+        ▼
+[ Dashboard / Reporting ]
 
----
-
-## 📈 Output Sample (dbt Mart Models)
-
-| customer_id | rfm_score | churn_status | behavioral_segment | combined_segment               |
-|-------------|-----------|---------------|---------------------|------------------------------|
-| CUST101     | 543       | At Risk       | Loyal Customer      | At Risk - Loyal Customer     |
-| CUST212     | 555       | Active        | Loyal High Spender  | Active - Loyal High Spender  |
-| CUST333     | 311       | Churned       | Occasional          | Churned - Occasional         |
-
----
-
-## 🛠️ CI/CD & Testing (Optional)
-
-You can integrate this project with:
-
-- ✅ **dbt Cloud + GitHub**
-- ✅ GitHub Actions or Azure DevOps pipelines
-- ✅ Run `dbt test` on every pull request
-- ✅ Alerts on test failure or job failure (email/slack)
 
 ---
 
-## 🌱 Future Enhancements
+🔍 Final Mart: Top 20 Customers
 
-You can extend this project with:
+-- model: top_customers.sql
+with ranked as (
+  select * from {{ ref('int_rfm_ranked') }}
+  where rno <= 20
+)
 
-- 📊 **Weekly/Monthly aggregates**
-- 🛍️ **Product-wise insights**
-- 🎯 **Campaign targeting dashboard (e.g., churn winback)**
-- 📥 Automate via **Snowflake Tasks + Streams**
-- 🔄 **Full SCD Type 2 via Snapshots**
-- 🧠 **Advanced ML model integration** (Propensity, LTV)
+select
+  customer_id,
+  contribution,
+  recency,
+  frequency,
+  monetary,
+  rno,
+  case
+    when recency <= 7 then 'Highly Active'
+    when recency between 8 and 30 then 'Active'
+    else 'Inactive'
+  end as customer_activity_status,
+  case
+    when contribution >= 1000 then 'High Value'
+    else 'Low Value'
+  end as customer_value_segment,
+  customer_activity_status || ' - ' || customer_value_segment as combined_segment
+from ranked
+
+> 💡 Business Insight: This mart helps identify high-value customers based on RFM metrics and activity recency, supporting strategic targeting and loyalty campaigns.
+
+
+
 
 ---
 
-## 👨‍💻 Author
+📊 Sample Output
 
-**Shankar Kamalakannan**  
-Snowflake + dbt Developer | Real-time Data Projects  
-GitHub: [@Shankarkk](https://github.com/Shankarkk)
+customer_id	contribution	recency	frequency	monetary	rno	customer_activity_status	customer_value_segment	combined_segment
+
+CUST101	1400	3	10	140	1	Highly Active	High Value	Highly Active - High Value
+CUST107	900	20	6	150	6	Active	Low Value	Active - Low Value
+
+
 
 ---
 
-## 📎 License
+🧪 Testing & Validation
 
-This project is open for educational use and real-time interview demonstration. Reach out for collaboration or freelance integration help ✌️
+✅ Layer-wise dbt tests added
+✅ Each intermediate and mart model has unique / not null tests
+✅ Validation done at UAT stage before productionizing
+
+
+---
+
+🚀 Future Enhancements
+
+> ⬛️ You can extend this project with:
+
+
+
+🗓️ Weekly/Monthly aggregates
+
+🛍️ Product-wise and category-level RFM analysis
+
+📈 Campaign performance segmentation
+
+🧾 Snapshot testing (using snapshots/)
+
+🔁 CI/CD integration (dbt Cloud or GitHub Actions)
+
+
+
+---
+
+👨‍💻 Author
+
+Shankar Kamalakannan
+Snowflake | dbt | Cloud Data Engineering
+📧 [your-email@example.com]
+🔗 [LinkedIn / Portfolio links optional]
 
 
 ---
