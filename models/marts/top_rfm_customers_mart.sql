@@ -1,3 +1,11 @@
+-- models/marts/top_rfm_customers_mart.sql
+
+{{ config(
+    materialized = 'table',
+    schema = 'marts',
+    tags = ['top_rfm_customers', 'rfm', 'customer_segmentation']
+) }}
+
 with ranked as (
     select * 
     from {{ ref('int_rfm_ranked') }}
