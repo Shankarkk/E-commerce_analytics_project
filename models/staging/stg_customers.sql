@@ -1,5 +1,4 @@
 {{ config(materialized='view', tags=['staging']) }}
-
 with stg_customers as (
     select 
         customer_id,
