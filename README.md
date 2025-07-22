@@ -1,11 +1,4 @@
 # 🛒 E-commerce Customer Analytics Project
-
-A complete end-to-end customer behavior and segmentation pipeline using **dbt + Snowflake**, focused on RFM analysis, churn detection, and identifying high-value customers.
-
----
-
-## 📁 Project Structure
-
 e_commerce_customer_analytics/ ├── models/ │   ├── staging/             # Raw staging models (customers, orders, products) │   ├── intermediate/        # Business logic models (RFM scoring, aggregations) │   ├── marts/               # Final models for segmentation, top customers │ ├── snapshots/               # Optional: Snapshot models for SCD handling ├── macros/                  # Reusable macros (e.g., percent_rank, days_diff) ├── tests/                   # Data quality & schema tests ├── dbt_project.yml
 
 ---
@@ -38,8 +31,8 @@ Raw → Staging → Intermediate → Mart
 
 ## 📌 Key Features
 
-| Feature                          | Included |
-|----------------------------------|----------|
+| Feature                          | Included   |
+|----------------------------------|----------
 | 🔢 RFM Score Computation         | ✅        |
 | 🧠 Behavioral Segmentation       | ✅        |
 | 🔁 Churn Status Tagging          | ✅        |
@@ -63,7 +56,7 @@ Raw → Staging → Intermediate → Mart
 
 ## 📈 Output Sample (dbt Mart Models)
 
-| customer_id | rfm_score | churn_status | behavioral_segment | combined_segment             |
+| customer_id | rfm_score | churn_status | behavioral_segment | combined_segment               |
 |-------------|-----------|---------------|---------------------|------------------------------|
 | CUST101     | 543       | At Risk       | Loyal Customer      | At Risk - Loyal Customer     |
 | CUST212     | 555       | Active        | Loyal High Spender  | Active - Loyal High Spender  |
