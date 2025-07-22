@@ -2,7 +2,6 @@
     materialized='view',
     tags=['staging']
 ) }}
-    
 with source as (
     select * from {{ source('datafeed', 'raw_order_items') }}
 )
