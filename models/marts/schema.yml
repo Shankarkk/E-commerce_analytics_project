@@ -55,3 +55,26 @@ models:
         description: "Total number of orders placed"
       - name: contribution
         description: "Total revenue contributed by the customer"
+
+  - name: customer_segmentation_mart
+    description: "Final mart with churn status, behavioral segment, and combined segmentation based on RFM scores"
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier"
+        tests:
+          - not_null
+          - unique
+      - name: recency
+        description: "Days since last purchase"
+      - name: frequency
+        description: "Total number of purchases"
+      - name: monetary
+        description: "Total spending amount"
+      - name: rfm_score
+        description: "Combined RFM score from intermediate model"
+      - name: churn_status
+        description: "Customer churn classification"
+      - name: behavioral_segment
+        description: "Behavioral segment based on frequency and monetary"
+      - name: combined_segment
+        description: "Combined churn and behavioral label
