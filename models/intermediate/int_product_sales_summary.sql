@@ -1,6 +1,7 @@
 {{ config(
     materialized='table',
-    unique_key='product_id'
+    unique_key='product_id',
+    tags=['intermediate']
 ) }}
     
 WITH product_sales AS (
