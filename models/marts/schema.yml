@@ -77,4 +77,4 @@ models:
       - name: behavioral_segment
         description: "Behavioral segment based on frequency and monetary"
       - name: combined_segment
-        description: "Combined churn and behavioral label
+        description: "Combined churn and behavioral label"
