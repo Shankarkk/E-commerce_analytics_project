@@ -8,6 +8,6 @@ with stg_customers as (
         gender,
         created_at::timestamp as customer_created_at,
         updated_at::timestamp as customer_updated_at
-    from {{ source('datafeed', 'raw_customer') }}
+    from {{ source('datafeed', 'raw_customers') }}
 )
 select * from stg_customers;
