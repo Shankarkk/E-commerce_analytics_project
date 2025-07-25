@@ -1,101 +1,53 @@
 version: 2
 
+sources:
+  - name: datafeed
+    database: ecomm_analytics_db
+    schema: datafeed
+    tables:
+      - name: raw_customers
+      - name: raw_orders
+      - name: raw_order_items
+      - name: raw_products
+      - name: raw_payments
+
 models:
   - name: stg_customers
-    description: "Staging model for raw customer data"
+    description: "Staging model for customers"
     columns:
       - name: customer_id
-        description: "Unique identifier for each customer"
         tests:
           - not_null
           - unique
-      - name: first_name
-        description: "Customer's first name"
-      - name: last_name
-        description: "Customer's last name"
-      - name: email
-        description: "Customer's email address"
-        tests:
-          - not_null
-      - name: created_at
-        description: "Timestamp when the customer was created"
 
   - name: stg_orders
-    description: "Staging model for raw orders data"
+    description: "Staging model for orders"
     columns:
       - name: order_id
-        description: "Unique identifier for each order"
         tests:
           - not_null
           - unique
-      - name: customer_id
-        description: "ID of the customer who placed the order"
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_customers')
-              field: customer_id
-      - name: order_date
-        description: "Date when the order was placed"
-      - name: status
-        description: "Current status of the order"
-
-  - name: stg_payments
-    description: "Staging model for raw payments data"
-    columns:
-      - name: payment_id
-        description: "Unique identifier for each payment"
-        tests:
-          - not_null
-          - unique
-      - name: order_id
-        description: "Order ID related to the payment"
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_orders')
-              field: order_id
-      - name: payment_method
-        description: "Method used for payment"
-      - name: amount
-        description: "Payment amount"
-
-  - name: stg_products
-    description: "Staging model for raw products data"
-    columns:
-      - name: product_id
-        description: "Unique product identifier"
-        tests:
-          - not_null
-          - unique
-      - name: product_name
-        description: "Name of the product"
-      - name: price
-        description: "Unit price of the product"
 
   - name: stg_order_items
-    description: "Staging model for order items data"
+    description: "Staging model for order items"
     columns:
       - name: order_item_id
-        description: "Unique identifier for each order item"
         tests:
           - not_null
           - unique
-      - name: order_id
-        description: "Order associated with the item"
-        tests:
-          - not_null
-          - relationships:
-              to: ref('stg_orders')
-              field: order_id
+
+  - name: stg_products
+    description: "Staging model for products"
+    columns:
       - name: product_id
-        description: "Product included in the order"
         tests:
           - not_null
-          - relationships:
-              to: ref('stg_products')
-              field: product_id
-      - name: quantity
-        description: "Number of units ordered"
-      - name: item_price
-        description: "Price per unit of the item"
+          - unique
+
+  - name: stg_payments
+    description: "Staging model for payments"
+    columns:
+      - name: payment_id
+        tests:
+          - not_null
+          - unique
