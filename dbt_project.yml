@@ -1,0 +1,22 @@
+name: e_commerce_analytics_project
+version: '1.0'
+config-version: 2
+
+profile: E-commerce_analytics_project
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+models:
+  e_commerce_analytics_project:
+    +materialized: view
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
