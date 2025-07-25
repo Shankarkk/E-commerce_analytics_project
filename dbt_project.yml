@@ -1,4 +1,4 @@
-name: 'E-commerce_analytics_project'
+name: 'ecommerce_analytics_project'
 version: '1.0.0'
 config-version: 2
 
@@ -17,7 +17,7 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  ecomm_analytics_project:
+  ecommerce_analytics_project:
     staging:
       +schema: staging
       +materialized: view
