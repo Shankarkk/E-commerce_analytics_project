@@ -2,7 +2,7 @@ version: 2
 
 sources:
   - name: datafeed
-    database: "{{(ecomm_analytics_db)}}"
+    database: ecomm_analytics_db
     schema: raw
     tables:
       - name: raw_customers

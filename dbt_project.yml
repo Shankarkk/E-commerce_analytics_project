@@ -1,8 +1,8 @@
-name: 'ecommerce_analytics_project'
-version: '1.0.0'
+name: 'e_commerce_analytics_project'
+version: '1.0'
 config-version: 2
 
-profile: 'default'
+profile: 'e_commerce_analytics_project'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -17,13 +17,8 @@ clean-targets:
   - "dbt_packages"
 
 models:
-  ecommerce_analytics_project:
+  e_commerce_analytics_project:
     staging:
-      +schema: staging
       +materialized: view
     intermediate:
-      +schema: intermediate
       +materialized: view
-    marts:
-      +schema: marts
-      +materialized: table

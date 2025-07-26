@@ -1,13 +1,16 @@
-{{ config(materialized='view', tags=['staging']) }}
-with stg_customers as (
+{{ config(
+    materialized='view',
+    tags=['staging']
+) }}
+with source as (
+
     select 
         customer_id,
         first_name,
         last_name,
         email,
         gender,
-        created_at::timestamp as customer_created_at,
-        updated_at::timestamp as customer_updated_at
-    from {{ source('datafeed', 'raw_customers') }}
+        created_at::timestamp as customer_created_at
+    from {{ source('datafeed','raw_customers') }}
 )
-select * from stg_customers;
+select * from source 

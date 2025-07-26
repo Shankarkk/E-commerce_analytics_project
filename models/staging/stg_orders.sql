@@ -1,5 +1,5 @@
 {{ config(materialized='view', tags=['staging']) }}
-with stg_orders as (
+with source as (
     select 
         order_id,
         customer_id,
@@ -7,7 +7,6 @@ with stg_orders as (
         order_date::timestamp as order_date,
         status,
         created_at::timestamp as order_created_at,
-        updated_at::timestamp as order_updated_at
-    from {{ source('datafeed', 'raw_orders') }}
+        from {{ source('datafeed', 'raw_orders') }}
 )
-select * from stg_orders;
+select * from source
