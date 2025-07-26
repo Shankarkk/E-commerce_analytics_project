@@ -1,16 +1,5 @@
 version: 2
 
-sources:
-  - name: datafeed
-    database: ecomm_analytics_db
-    schema: datafeed
-    tables:
-      - name: raw_customers
-      - name: raw_orders
-      - name: raw_order_items
-      - name: raw_products
-      - name: raw_payments
-
 models:
   - name: stg_customers
     description: "Staging model for customers"
