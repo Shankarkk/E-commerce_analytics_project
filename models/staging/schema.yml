@@ -2,41 +2,77 @@ version: 2
 
 models:
   - name: stg_customers
-    description: "Staging model for customers"
+    description: Staging model for customers
     columns:
       - name: customer_id
         tests:
           - not_null
           - unique
+      - name: first_name
+      - name: last_name
+      - name: email
+      - name: phone_number
+      - name: created_at
 
   - name: stg_orders
-    description: "Staging model for orders"
+    description: Staging model for orders
     columns:
       - name: order_id
         tests:
           - not_null
           - unique
+      - name: customer_id
+      - name: order_date
+      - name: status
+      - name: created_at
 
   - name: stg_order_items
-    description: "Staging model for order items"
+    description: Staging model for order items
     columns:
       - name: order_item_id
         tests:
           - not_null
           - unique
+      - name: order_id
+      - name: product_id
+      - name: quantity
+      - name: item_price
+      - name: created_at
+
+  - name: stg_payments
+    description: Staging model for payments
+    columns:
+      - name: payment_id
+        tests:
+          - not_null
+          - unique
+      - name: order_id
+      - name: payment_method
+      - name: amount
+      - name: payment_date
 
   - name: stg_products
-    description: "Staging model for products"
+    description: Staging model for products
     columns:
       - name: product_id
         tests:
           - not_null
           - unique
+      - name: product_name
+      - name: price
+      - name: category_id
+      - name: created_at
 
-  - name: stg_payments
-    description: "Staging model for payments"
+  - name: stg_categories
+    description: Staging model for categories
     columns:
-      - name: payment_id
+      - name: category_id
+        tests:
+          - not_null
+          - unique
+      - name: category_name
+      - name: created_at
+      - name: category_key
         tests:
           - not_null
           - unique
