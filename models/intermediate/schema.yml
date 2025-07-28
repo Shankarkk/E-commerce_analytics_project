@@ -1,0 +1,125 @@
+version: 2
+
+models:
+  - name: int_orders
+    description: "Combines orders with order items, payments, and customer info"
+    columns:
+      - name: order_id
+        description: "Unique order identifier"
+        tests:
+          - not_null
+      - name: customer_id
+        description: "Customer who placed the order"
+      - name: order_date
+        description: "Date the order was placed"
+      - name: product_id
+        description: "Product ID"
+      - name: category
+        description: "Product category"
+      - name: payment_method
+        description: "Method of payment"
+      - name: quantity
+        description: "Total quantity ordered"
+      - name: total_price
+        description: "Total price (quantity * unit price)"
+
+  - name: int_customer_order_summary
+    description: "Summary of each customer's order behavior"
+    columns:
+      - name: customer_id
+        description: "Unique customer ID"
+        tests:
+          - not_null
+          - unique
+      - name: first_name
+        description: "Customer's first name"
+      - name: last_name
+        description: "Customer's last name"
+      - name: total_orders
+        description: "Total number of orders placed"
+      - name: total_items
+        description: "Total items purchased"
+      - name: total_spent
+        description: "Total amount spent"
+      - name: first_order_date
+        description: "Date of first order"
+      - name: last_order_date
+        description: "Date of most recent order"
+      - name: avg_order_value
+        description: "Average order value"
+      - name: customer_segment
+        description: "Customer classification (e.g., New, Returning, etc.)"
+
+  - name: int_customer_product_interaction
+    description: "Tracks customer's interaction with products"
+    columns:
+      - name: customer_id
+        description: "Customer ID"
+        tests:
+          - not_null
+      - name: product_id
+        description: "Product purchased"
+      - name: total_quantity
+        description: "Total quantity of this product purchased"
+      - name: total_spent
+        description: "Total spent on this product"
+      - name: last_purchase_date
+        description: "Most recent purchase of this product"
+
+  - name: int_product_order_summary
+    description: "Aggregated stats for each product across all orders"
+    columns:
+      - name: product_id
+        description: "Product ID"
+        tests:
+          - not_null
+          - unique
+      - name: total_orders
+        description: "Total number of orders including this product"
+      - name: total_quantity
+        description: "Total quantity sold"
+      - name: total_revenue
+        description: "Total revenue generated"
+
+  - name: int_customer_frequency_monthly
+    description: "Customer order frequency by month"
+    columns:
+      - name: customer_id
+        description: "Customer ID"
+        tests:
+          - not_null
+      - name: year_month
+        description: "Year and month of order"
+      - name: order_count
+        description: "Number of orders in that month"
+
+  - name: int_customer_frequency_weekly
+    description: "Customer order frequency by week"
+    columns:
+      - name: customer_id
+        description: "Customer ID"
+        tests:
+          - not_null
+      - name: week_start_date
+        description: "Start of the week"
+      - name: order_count
+        description: "Number of orders in that week"
+
+  - name: int_rfm_rank_calc
+    description: "RFM score calculation and ranking for each customer"
+    columns:
+      - name: customer_id
+        description: "Customer ID"
+        tests:
+          - not_null
+          - unique
+      - name: recency
+        description: "Days since last order"
+      - name: frequency
+        description: "Total orders placed"
+      - name: monetary
+        description: "Total money spent"
+      - name: rfm_score
+        description: "Combined RFM score"
+      - name: rfm_rank
+        description: "Ranking based on RFM score"
