@@ -11,7 +11,7 @@ with order_items as (
         o.customer_id,
         i.product_id,
         i.quantity,
-        i.amount
+        i.unit_price
     from {{ ref('stg_orders') }} o
     join {{ ref('stg_order_items') }} i
       on o.order_id = i.order_id
@@ -26,7 +26,7 @@ customer_product_metrics as (
         product_id,
         count(distinct order_id) as total_orders,
         sum(quantity) as total_quantity,
-        sum(amount) as total_spent_on_product
+        sum(unit_price * quantity) as total_spent_on_product
     from order_items
     group by customer_id, product_id
 

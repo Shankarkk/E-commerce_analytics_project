@@ -9,10 +9,10 @@ WITH customer_orders AS (
         o.customer_id,
         COUNT(DISTINCT o.order_id) AS total_orders,
         SUM(oi.quantity) AS total_items,
-        SUM(oi.quantity * oi.total_price) AS total_spent,
+        SUM(oi.quantity * oi.unit_price) AS total_spent,
         MIN(o.order_date) AS first_order_date,
         MAX(o.order_date) AS last_order_date,
-        ROUND(SUM(oi.quantity * oi.total_price) / COUNT(DISTINCT o.order_id), 2) AS avg_order_value
+        ROUND(SUM(oi.quantity * oi.unit_price) / COUNT(DISTINCT o.order_id), 2) AS avg_order_value
     FROM {{ ref('stg_orders') }} o
     JOIN {{ ref('stg_order_items') }} oi 
         ON o.order_id = oi.order_id
