@@ -26,7 +26,7 @@ add_recency as (
          from customer_summary  
 ),
 
-final as (
+final_rfm as (
     select 
         customer_id,
         recency_days,
@@ -39,5 +39,25 @@ final as (
         cast(frequency_score as string) ||
         cast(monetary_score as string) as rfm_score
         from add_recency
-)        
-select * from final
+),
+rfm_segmented as (
+    select
+        customer_id,
+        recency_days,
+        frequency,
+        monetary,
+        recency_score,
+        frequency_score,
+        monetary_score,
+        rfm_score,
+        case 
+            when rfm_score between '555' and '543' then 'Champions'
+            when rfm_score between '542' and '444' then 'Loyal Customers'
+            when rfm_score between '443' and '333' then 'Potential Loyalist'
+            when rfm_score between '332' and '222' then 'At Risk'
+            else 'Hibernating'
+        end as rfm_segment
+    from final_rfm
+)
+
+select * from rfm_segmented

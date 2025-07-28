@@ -1,5 +1,6 @@
 version: 2
 
+
 models:
   - name: int_orders
     description: "Combines orders with order items, payments, and customer info"
@@ -8,8 +9,11 @@ models:
         description: "Unique order identifier"
         tests:
           - not_null
+          - unique
       - name: customer_id
         description: "Customer who placed the order"
+        tests:
+          - not_null
       - name: order_date
         description: "Date the order was placed"
       - name: product_id
@@ -22,6 +26,7 @@ models:
         description: "Total quantity ordered"
       - name: total_price
         description: "Total price (quantity * unit price)"
+
 
   - name: int_customer_order_summary
     description: "Summary of each customer's order behavior"
@@ -50,6 +55,7 @@ models:
       - name: customer_segment
         description: "Customer classification (e.g., New, Returning, etc.)"
 
+
   - name: int_customer_product_interaction
     description: "Tracks customer's interaction with products"
     columns:
@@ -59,6 +65,8 @@ models:
           - not_null
       - name: product_id
         description: "Product purchased"
+        tests:
+          - not_null
       - name: total_quantity
         description: "Total quantity of this product purchased"
       - name: total_spent
@@ -66,47 +74,9 @@ models:
       - name: last_purchase_date
         description: "Most recent purchase of this product"
 
-  - name: int_product_order_summary
-    description: "Aggregated stats for each product across all orders"
-    columns:
-      - name: product_id
-        description: "Product ID"
-        tests:
-          - not_null
-          - unique
-      - name: total_orders
-        description: "Total number of orders including this product"
-      - name: total_quantity
-        description: "Total quantity sold"
-      - name: total_revenue
-        description: "Total revenue generated"
-
-  - name: int_customer_frequency_monthly
-    description: "Customer order frequency by month"
-    columns:
-      - name: customer_id
-        description: "Customer ID"
-        tests:
-          - not_null
-      - name: year_month
-        description: "Year and month of order"
-      - name: order_count
-        description: "Number of orders in that month"
-
-  - name: int_customer_frequency_weekly
-    description: "Customer order frequency by week"
-    columns:
-      - name: customer_id
-        description: "Customer ID"
-        tests:
-          - not_null
-      - name: week_start_date
-        description: "Start of the week"
-      - name: order_count
-        description: "Number of orders in that week"
 
   - name: int_rfm_rank_calc
-    description: "RFM score calculation and ranking for each customer"
+    description: "RFM score calculation and ranking for each customer into meaningful buckets"
     columns:
       - name: customer_id
         description: "Customer ID"
@@ -120,6 +90,10 @@ models:
       - name: monetary
         description: "Total money spent"
       - name: rfm_score
-        description: "Combined RFM score"
-      - name: rfm_rank
-        description: "Ranking based on RFM score"
+        description: "Concatenated RFM score (e.g., 555)"
+        tests:
+          - not_null
+      - name: rfm_segment
+        description: "Customer segment derived from RFM score"
+        tests:
+          - not_null

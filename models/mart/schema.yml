@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: mart_product_sale_monthly
+    description: "Monthly product-level aggregated sales data"
+    columns:
+      - name: product_id
+        description: "Unique product identifier"
+        tests:
+          - not_null
+      - name: category
+        description: "Product category"
+      - name: order_month
+        description: "Order month in YYYY-MM format"
+        tests:
+          - not_null
+      - name: total_quantity_sold
+        description: "Total quantity sold in the month"
+      - name: total_sales
+        description: "Total sales (revenue) for the product in that month"
+
+  - name: mart_customer_360
+    description: "Comprehensive view of each customer’s overall behavior"
+    columns:
+      - name: customer_id
+        description: "Unique customer ID"
+        tests:
+          - not_null
+          - unique
+      - name: full_name
+        description: "Customer’s full name"
+      - name: total_orders
+        description: "Total number of orders placed"
+      - name: total_items
+        description: "Total number of items purchased"
+      - name: total_spent
+        description: "Total money spent by the customer"
+      - name: first_order_date
+        description: "Date of first order"
+      - name: last_order_date
+        description: "Date of most recent order"
+      - name: avg_order_value
+        description: "Average value per order"
+      - name: rfm_segment
+        description: "Customer segmentation label based on RFM"
