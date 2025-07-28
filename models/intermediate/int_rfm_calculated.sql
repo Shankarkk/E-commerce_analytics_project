@@ -4,18 +4,37 @@
     tags=['intermediate']
 ) }}
 
-with customer_orders as (
+with customer_order_data as(
     select
-        sc.customer_id,
-        max(so.order_date) as most_recent_order,
-        datediff('day', max(so.order_date), current_date) as recency,
-        count(so.order_id) as frequency,
-        sum(so.order_amount) as contribution
-    from {{ ref('stg_customers') }} as sc
-    join {{ ref('stg_orders') }} as so
-        on sc.customer_id = so.customer_id
-    group by sc.customer_id
-)
+        o.customer_id,
+        o.order_id,
+        o.order_date,
+        oi.quantity,
+        oi.unit_price,
+        (oi.quantity * oi.unit_price)as order_total
+        from {{ref ('stg_orders') }} o
+        JOIN {{ref ('stg_order_items') }} oi
+        ON o.order_id = oi.order_id
+        where o.status = 'delivered'
+        
+),
 
-select *
-from customer_orders
+customer_rfm_summary as (
+    select
+        customer_id,
+        max(order_date) as last_order_date,
+        count(DISTINCT order_id) as frequency,
+        sum(order_total) as monetary_value
+    from customer_order_data
+    GROUP BY customer_id
+),
+
+rfm_final as (
+    select
+        customer_id,
+        DATEDIFF('day',last_order_date,current_date) as recency,
+        frequency,
+        monetary_value
+        from customer_rfm_summary
+)
+select * from rfm_final

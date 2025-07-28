@@ -21,3 +21,4 @@ select
     *,
     row_number() over (order by contribution desc) as rno
 from rfm
+

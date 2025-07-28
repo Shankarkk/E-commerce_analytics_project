@@ -9,8 +9,8 @@ WITH product_sales AS (
         p.product_id,
         p.product_name,
         SUM(oi.quantity) AS total_units_sold,
-        SUM(oi.quantity * oi.total_price) AS total_revenue,
-        ROUND(SUM(oi.quantity * oi.total_price) / NULLIF(SUM(oi.quantity), 0), 2) AS avg_selling_price,
+        SUM(oi.quantity * oi.unit_price) AS total_revenue,
+        ROUND(SUM(oi.quantity * oi.unit_price) / NULLIF(SUM(oi.quantity), 0), 2) AS avg_selling_price,
         COUNT(DISTINCT o.customer_id) AS unique_customers
     FROM {{ ref('stg_order_items') }} oi
     JOIN {{ ref('stg_orders') }} o
