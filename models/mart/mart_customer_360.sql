@@ -71,3 +71,4 @@ select
         cb.customer_id = rfm.customer_id
         LEFT JOIN customer_summary cs ON 
         cb.customer_id = cs.customer_id
+        --test comment
