@@ -2,7 +2,7 @@ name: 'e_commerce_analytics_project'
 version: '1.0'
 config-version: 2
 
-profile: 'default'
+profile: 'ecomm_analytics'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -19,9 +19,8 @@ clean-targets:
 models:
   e_commerce_analytics_project:
     staging:
-      +schema: "{{target.name}}_staging"
+      +materialized: view
     intermediate:
-      +schema: "{{target.name}}_intermediate"
+      +materialized: table
     mart:
-      +schema: "{{target.name}}_mart"
-
+      +materialized: table
