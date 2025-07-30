@@ -2,7 +2,7 @@ name: 'e_commerce_analytics_project'
 version: '1.0'
 config-version: 2
 
-profile: 'e_commerce_analytics_project'
+profile: 'ecomm_analytics'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
@@ -21,4 +21,6 @@ models:
     staging:
       +materialized: view
     intermediate:
-      +materialized: view
+      +materialized: table
+    mart:
+      +materialized: table
