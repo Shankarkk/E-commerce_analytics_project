@@ -2,7 +2,7 @@ name: 'e_commerce_analytics_project'
 version: '1.0'
 config-version: 2
 
-profile: 'ecomm_analytics'
+profile: 'default'
 
 model-paths: ["models"]
 analysis-paths: ["analyses"]
