@@ -11,7 +11,7 @@ with customer_order_data as(
         o.order_date,
         oi.quantity,
         oi.unit_price,
-        (oi.quantity * oi.unit_price)as order_total
+        ROUND(oi.quantity * oi.unit_price,2)as order_total
         from {{ref ('stg_orders') }} o
         JOIN {{ref ('stg_order_items') }} oi
         ON o.order_id = oi.order_id

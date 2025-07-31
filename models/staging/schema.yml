@@ -24,7 +24,7 @@ models:
       - name: customer_id
       - name: order_date
       - name: status
-      - name: created_at
+      - name: order_created_at
 
   - name: stg_order_items
     description: Staging model for order items
@@ -50,7 +50,8 @@ models:
       - name: payment_method
       - name: amount
       - name: payment_date
-
+      - name: payment_created_at
+      
   - name: stg_products
     description: Staging model for products
     columns:
@@ -59,8 +60,8 @@ models:
           - not_null
           - unique
       - name: product_name
-      - name: price
-      - name: category_id
+      - name: unit_price
+      - name: category
       - name: created_at
 
   - name: stg_categories
