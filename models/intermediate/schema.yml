@@ -1,99 +1,102 @@
+
 version: 2
 
-
 models:
-  - name: int_orders
-    description: "Combines orders with order items, payments, and customer info"
+  - name: int_base_product_sales
+    description: "Base-level product sales and revenue metrics."
     columns:
-      - name: order_id
-        description: "Unique order identifier"
-        tests:
-          - not_null
-          - unique
-      - name: customer_id
-        description: "Customer who placed the order"
-        tests:
-          - not_null
-      - name: order_date
-        description: "Date the order was placed"
       - name: product_id
-        description: "Product ID"
-      - name: category
-        description: "Product category"
-      - name: payment_method
-        description: "Method of payment"
-      - name: quantity
-        description: "Total quantity ordered"
-      - name: total_price
-        description: "Total price (quantity * unit price)"
+        description: "Unique product identifier."
+        tests:
+          - not_null
+      - name: total_quantity_sold
+        description: "Total number of units sold."
+      - name: total_revenue
+        description: "Total revenue from the product."
 
 
   - name: int_customer_order_summary
-    description: "Summary of each customer's order behavior"
+    description: "Customer-level total orders and spending."
     columns:
       - name: customer_id
-        description: "Unique customer ID"
+        description: "Customer ID."
         tests:
-          - not_null
           - unique
-      - name: first_name
-        description: "Customer's first name"
-      - name: last_name
-        description: "Customer's last name"
+          - not_null
       - name: total_orders
-        description: "Total number of orders placed"
-      - name: total_items
-        description: "Total items purchased"
+        description: "Total number of orders placed by the customer."
       - name: total_spent
-        description: "Total amount spent"
-      - name: first_order_date
-        description: "Date of first order"
-      - name: last_order_date
-        description: "Date of most recent order"
-      - name: avg_order_value
-        description: "Average order value"
-      - name: customer_segment
-        description: "Customer classification (e.g., New, Returning, etc.)"
+        description: "Total amount spent by the customer."
 
 
   - name: int_customer_product_interaction
-    description: "Tracks customer's interaction with products"
+    description: "Tracks how each customer interacted with products."
     columns:
       - name: customer_id
-        description: "Customer ID"
+        description: "Customer ID."
         tests:
           - not_null
       - name: product_id
-        description: "Product purchased"
+        description: "Product ID."
         tests:
           - not_null
-      - name: total_quantity
-        description: "Total quantity of this product purchased"
-      - name: total_spent
-        description: "Total spent on this product"
-      - name: last_purchase_date
-        description: "Most recent purchase of this product"
+      - name: times_purchased
+        description: "How many times the product was bought by the customer."
 
 
-  - name: int_rfm_rank_calc
-    description: "RFM score calculation and ranking for each customer into meaningful buckets"
+  - name: int_orders
+    description: "Order-level cleaned data enriched with customer and date info."
+    columns:
+      - name: order_id
+        description: "Unique order ID."
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Customer who placed the order."
+        tests:
+          - not_null
+      - name: order_date
+        description: "Date when order was placed."
+        tests:
+          - not_null
+
+
+  - name: int_rfm_calculated
+    description: "RFM base metrics for each customer."
     columns:
       - name: customer_id
-        description: "Customer ID"
+        description: "Customer ID."
         tests:
           - not_null
           - unique
-      - name: recency
-        description: "Days since last order"
+      - name: recency_days
+        description: "Days since last order."
       - name: frequency
-        description: "Total orders placed"
+        description: "Number of orders."
       - name: monetary
-        description: "Total money spent"
+        description: "Total spend by customer."
+
+
+  - name: int_rfm_rank_calc
+    description: "Calculated RFM score for each customer."
+    columns:
+      - name: customer_id
+        description: "Customer ID."
+        tests:
+          - not_null
       - name: rfm_score
-        description: "Concatenated RFM score (e.g., 555)"
+        description: "Combined RFM score used for ranking."
+
+
+  - name: int_top_20_rfm_customers
+    description: "Top 20 customers based on RFM score and spend."
+    columns:
+      - name: customer_id
+        description: "Top performing customer ID."
         tests:
           - not_null
-      - name: rfm_segment
-        description: "Customer segment derived from RFM score"
-        tests:
-          - not_null
+      - name: rfm_score
+        description: "RFM score used for filtering top customers."
+      - name: total_spent
+        description: "Total spend by customer."
