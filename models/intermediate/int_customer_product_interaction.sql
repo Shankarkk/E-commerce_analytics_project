@@ -1,36 +1,41 @@
 {{ config(
-    materialized='table',
+    materialized='incremental',
     unique_key=['customer_id', 'product_id'],
+    incremental_strategy='merge',
     tags=['intermediate']
 ) }}
-    
-with order_items as (
 
-    select 
+
+WITH order_items AS (
+    SELECT
         o.order_id,
         o.customer_id,
         i.product_id,
         i.quantity,
-        i.unit_price
-    from {{ ref('stg_orders') }} o
-    join {{ ref('stg_order_items') }} i
-      on o.order_id = i.order_id
-    where o.status = 'delivered'
-
+        i.unit_price,
+        o.order_date
+    FROM {{ ref('stg_orders') }} o
+    JOIN {{ ref('stg_order_items') }} i
+        ON o.order_id = i.order_id
+    WHERE o.status = 'delivered'
 ),
 
-customer_product_metrics as (
 
-    select 
+customer_product_metrics AS (
+    SELECT
         customer_id,
         product_id,
-        count(distinct order_id) as total_orders,
-        sum(quantity) as total_quantity,
-        sum(unit_price * quantity) as total_spent_on_product
-    from order_items
-    group by customer_id, product_id
-
+        COUNT(DISTINCT order_id) AS total_orders,
+        SUM(quantity) AS total_quantity,
+        SUM(unit_price * quantity) AS total_spent_on_product,
+        MIN(order_date) AS first_order_date,
+        MAX(order_date) AS last_order_date
+    FROM order_items
+    {% if is_incremental() %}
+    WHERE order_date > (SELECT MAX(last_order_date) FROM {{ this }})
+    {% endif %}
+    GROUP BY customer_id, product_id
 )
 
-select * 
-from customer_product_metrics
+
+SELECT * FROM customer_product_metrics

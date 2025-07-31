@@ -1,10 +1,12 @@
 {{ config(
-    materialized='table',
-    unique_key='customer_id',
-    tags=['intermediate']
+    materialized = 'incremental',
+    unique_key = 'customer_id',
+    incremental_strategy = 'merge',
+    tags = ['intermediate']
 ) }}
 
 WITH customer_orders AS (
+
     SELECT 
         o.customer_id,
         COUNT(DISTINCT o.order_id) AS total_orders,
@@ -16,6 +18,11 @@ WITH customer_orders AS (
     FROM {{ ref('stg_orders') }} o
     JOIN {{ ref('stg_order_items') }} oi 
         ON o.order_id = oi.order_id
+
+    {% if is_incremental() %}
+        WHERE o.order_date > (SELECT MAX(last_order_date) FROM {{ this }})
+    {% endif %}
+
     GROUP BY o.customer_id
 ),
 
