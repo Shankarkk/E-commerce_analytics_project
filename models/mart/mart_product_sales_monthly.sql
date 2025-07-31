@@ -1,6 +1,5 @@
 {{ config(
     materialized='table',
-    unique_key='customer_id',
     tags=['mart','monthly','final']
 ) }}
 

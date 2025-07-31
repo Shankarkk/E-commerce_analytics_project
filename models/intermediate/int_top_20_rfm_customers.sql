@@ -18,7 +18,7 @@ top_20 as (
         recency_score,
         frequency_score,
         rfm_score,
-        row_number()over (order by rfm_score desc) as int_rfm_rank_calc
+        row_number()over (order by rfm_score desc) as rfm_rank
     from rfm_data
     order by rfm_score desc
     limit 20

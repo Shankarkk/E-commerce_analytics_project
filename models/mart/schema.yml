@@ -1,5 +1,6 @@
 version: 2
 
+
 models:
   - name: mart_product_sale_monthly
     description: "Monthly product-level aggregated sales data"
@@ -18,6 +19,7 @@ models:
         description: "Total quantity sold in the month"
       - name: total_sales
         description: "Total sales (revenue) for the product in that month"
+
 
   - name: mart_customer_360
     description: "Comprehensive view of each customer’s overall behavior"

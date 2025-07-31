@@ -22,7 +22,7 @@ add_recency as (
          datediff('day',last_order_date,current_date)as recency_days,
          ntile(5) over (order by datediff('day',last_order_date,current_date))as recency_score,
          ntile(5) over (order by total_orders desc)as frequency_score,
-         ntile(5) over (order by total_spent desc) monetary_score,
+         ntile(5) over (order by total_spent desc) monetary_score
          from customer_summary  
 ),
 
