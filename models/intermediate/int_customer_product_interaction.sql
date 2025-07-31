@@ -21,6 +21,17 @@ WITH order_items AS (
 ),
 
 
+filtered_orders AS (
+    SELECT *
+    FROM order_items
+    {% if is_incremental() %}
+    WHERE order_date > (
+        SELECT COALESCE(MAX(last_order_date),TO_DATE('2000-01-01')) FROM {{ this }}
+    )
+    {% endif %}
+),
+
+
 customer_product_metrics AS (
     SELECT
         customer_id,
@@ -30,10 +41,7 @@ customer_product_metrics AS (
         SUM(unit_price * quantity) AS total_spent_on_product,
         MIN(order_date) AS first_order_date,
         MAX(order_date) AS last_order_date
-    FROM order_items
-    {% if is_incremental() %}
-    WHERE order_date > (SELECT MAX(last_order_date) FROM {{ this }})
-    {% endif %}
+    FROM filtered_orders
     GROUP BY customer_id, product_id
 )
 
