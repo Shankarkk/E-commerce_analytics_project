@@ -1,82 +1,90 @@
-# 🛍️ E-commerce Customer Analytics Project
+# 🛒 E-commerce ELT Pipeline – Snowflake + dbt
 
-A real-world data pipeline project built using Snowflake and dbt, focusing on customer behavior, order trends, and business-focused analytics.
-
----
-
-## 🎯 Objective
-
-To deliver actionable insights into customer retention, repeat purchases, and lifetime value using a modular and scalable analytics pipeline powered by dbt on Snowflake.
+A real-world data engineering project to build a clean, production-grade ELT pipeline using **Snowflake**, **dbt**, and **CI/CD automation**.
 
 ---
 
-## 📁 Project Structure
+## 🔧 Tech Stack
 
-e_commerce_customer_analytics/ │ ├── models/ │   ├── staging/             # Raw source layer (orders, customers, products) │   ├── intermediate/        # Business logic layer (RFM, joins, aggregations) │   ├── marts/               # Final analytics-ready tables │ ├── snapshots/               # Snapshot setup (for future SCD tracking) │ ├── dbt_project.yml          # Project config ├── README.md                # Project documentation
-
----
-
-## 🧠 Use Cases Covered
-
-- RFM (Recency, Frequency, Monetary) Scoring
-- Repeat vs First-time Customer Analysis
-- Top N Customers by Lifetime Value
-- Weekly and Monthly Revenue Trends
-- Customer Purchase Gap & Retention Pattern
-- Active vs Inactive Customer Segmentation
+- **Snowflake** – Data warehouse  
+- **dbt (Data Build Tool)** – Transformation layer  
+- **Git** – Version control & branching  
+- **dbt Cloud Jobs** – Scheduling & CI/CD  
+- **Jinja Macros** – Reusable logic  
+- **Azure Data Factory (ADF)** – Orchestration (optional)  
+- **Amazon S3** – External file stage
 
 ---
 
-## 📆 Time-Based Logic Applied
+## 🔁 ELT Pipeline Flow
 
-- `DATE_TRUNC()` used for week/month slicing
-- `LAG()` applied for calculating gaps between purchases
-- Order filters using date ranges (`BETWEEN`, `>`, `<=`)
-- Current active customers derived using date diff logic
+Raw Data → Staging Models → Intermediate Models → Mart Models → Business Dashboards
 
----
-
-## ⚙️ dbt Features & Configuration
-
-- `incremental` materialization for scalable builds
-- Unique key definitions for merge logic
-- Data tests (`not_null`, `unique`, `relationships`) added
-- Snapshot scaffolding for future SCD tracking
-- Modular structure aligned with best practices (`staging → intermediate → marts`)
+- `staging/` – Cleans and casts raw data  
+- `intermediate/` – Applies joins, metrics logic, and aggregations  
+- `marts/` – Business-focused models (top customers, order trends)  
+- Supports **incremental loading** using `is_incremental()`  
+- Automated with **dbt Cloud Jobs** or **Snowflake Streams + Tasks**
 
 ---
 
-## 🧾 Snapshots Setup
+## 🧱 Folder Structure
 
-- Folder created under `/snapshots/`
-- Future plan:
-  - Track slowly changing customer/product attributes
-  - Maintain historical views using SCD Type 2
-  - Add `dbt snapshot` logic when SCD changes are required
+dbt_project/ │ ├── models/ │   ├── staging/ │   ├── intermediate/ │   ├── marts/ │   └── snapshots/ (planned) │ ├── macros/ ├── seeds/ ├── tests/ ├── dbt_project.yml └── packages.yml
 
 ---
 
-## 📌 Future Enhancements
+## 📊 Business Use Cases
 
-- Product category-level performance tracking
-- Campaign and marketing dashboard integration
-- Advanced customer segmentation using clustering
-- CI/CD pipeline using dbt Cloud + GitHub Actions
-- Integration with Metabase/Tableau for visualization
-
----
-
-## 🛠️ Tools & Technologies
-
-| Area                  | Tool / Platform      |
-|-----------------------|----------------------|
-| Data Warehouse        | Snowflake            |
-| Transformation Logic  | dbt (Core)           |
-| Version Control       | GitHub               |
-| Visualization (opt.)  | Metabase / Tableau   |
+- Identify top customers by **monthly/weekly revenue**  
+- Track product sales trends  
+- Monitor order frequency per customer  
+- Enable marketing ROI insights  
+- Ensure freshness using CI/CD and alerts
 
 ---
 
-## 🙌 Credits
+## 🧪 Testing & Quality
 
-Project developed as part of a real-time portfolio to demonstrate cloud data engineering skills using dbt and Snowflake in an e-commerce analytics context.
+- dbt built-in tests:
+  - `unique`, `not_null`, `relationships`
+- Modular SQL using **Jinja macros**
+- Incremental model validation using:
+
+```sql
+{% if is_incremental() %}
+    WHERE updated_at > (SELECT MAX(updated_at) FROM {{ this }})
+{% endif %}
+
+
+---
+
+📎 Resources
+
+📄 Project Snapshot PDF
+
+📃 Resume (Markdown Version)
+
+📫 Contact: shankar.freelance.dataengineer@gmail.com
+
+
+
+---
+
+🔗 Live Repos
+
+✅ Main Project Repo
+
+✅ Resume Repo
+
+
+
+---
+
+💬 About Me
+
+I'm Shankar Kamalakannan, a freelance Snowflake + dbt developer focused on delivering clean data pipelines with test-driven logic, Git-based CI/CD, and real business alignment.
+
+Let’s connect:
+📧 shankar.freelance.dataengineer@gmail.com
+🔗 LinkedIn
