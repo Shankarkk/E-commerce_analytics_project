@@ -1,3 +1,8 @@
+![Snowflake](https://img.shields.io/badge/Snowflake-Data--Warehouse-blue)
+![dbt](https://img.shields.io/badge/dbt-Data--Build--Tool-orange)
+![CI/CD](https://img.shields.io/badge/CI%2FCD-Automation-green)
+![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
+
 # 🛒 E-commerce ELT Pipeline – Snowflake + dbt
 
 A real-world data engineering project to build a clean, production-grade ELT pipeline using **Snowflake**, **dbt**, and **CI/CD automation**.
