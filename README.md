@@ -87,8 +87,8 @@ Resume (Markdown Version)
 
 💬 About Me
 
-I'm Shankar Kamalakannan, a freelance Snowflake + dbt developer focused on delivering clean data
-pipelines with test-driven logic, Git-based CI/CD, and real business alignment.
+I'm Shankar Kamalakannan, a freelance Snowflake + dbt developer focused on delivering clean
+data pipelines with test-driven logic, Git-based CI/CD, and real business alignment.
 
 Let’s connect:
 📧 shankar.freelance.dataengineer@gmail.com
