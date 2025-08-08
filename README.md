@@ -3,13 +3,13 @@
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-Automation-green)
 ![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
 
-# 🛒 E-commerce ELT Pipeline – Snowflake + dbt
+# 🛒 E-commerce ELT Pipeline – Snowflake + dbt  
 
-A real-world data engineering project to build a clean, production-grade ELT pipeline using **Snowflake**, **dbt**, and **CI/CD automation**.
+A real-world data engineering project to build a clean, production-grade ELT pipeline using **Snowflake**, **dbt**, and **CI/CD automation**.  
 
 ---
 
-## 🔧 Tech Stack
+## 🔧 Tech Stack  
 
 - **Snowflake** – Data warehouse  
 - **dbt (Data Build Tool)** – Transformation layer  
@@ -17,19 +17,19 @@ A real-world data engineering project to build a clean, production-grade ELT pip
 - **dbt Cloud Jobs** – Scheduling & CI/CD  
 - **Jinja Macros** – Reusable logic  
 - **Azure Data Factory (ADF)** – Orchestration (optional)  
-- **Amazon S3** – External file stage
+- **Amazon S3** – External file stage  
 
 ---
 
-## 🔁 ELT Pipeline Flow
+## 🔁 ELT Pipeline Flow  
 
-Raw Data → Staging Models → Intermediate Models → Mart Models → Business Dashboards
+Raw Data → Staging Models → Intermediate Models → Mart Models → Business Dashboards  
 
 - `staging/` – Cleans and casts raw data  
 - `intermediate/` – Applies joins, metrics logic, and aggregations  
 - `marts/` – Business-focused models (top customers, order trends)  
 - Supports **incremental loading** using `is_incremental()`  
-- Automated with **dbt Cloud Jobs** or **Snowflake Streams + Tasks**
+- Automated with **dbt Cloud Jobs** or **Snowflake Streams + Tasks**  
 
 ---
 
@@ -39,22 +39,24 @@ dbt_project/ │ ├── models/ │   ├── staging/ │   ├── inte
 
 ---
 
-## 📊 Business Use Cases
+## 📊 Business Use Cases  
 
 - Identify top customers by **monthly/weekly revenue**  
 - Track product sales trends  
 - Monitor order frequency per customer  
 - Enable marketing ROI insights  
-- Ensure freshness using CI/CD and alerts
+- Ensure freshness using CI/CD and alerts  
 
 ---
 
-## 🧪 Testing & Quality
+## 🧪 Testing & Quality  
 
-- dbt built-in tests:
-  - `unique`, `not_null`, `relationships`
-- Modular SQL using **Jinja macros**
-- Incremental model validation using:
+- dbt built-in tests:  
+  - `unique`  
+  - `not_null`  
+  - `relationships`  
+- Modular SQL using **Jinja macros**  
+- Incremental model validation using:  
 
 ```sql
 {% if is_incremental() %}
@@ -68,19 +70,9 @@ dbt_project/ │ ├── models/ │   ├── staging/ │   ├── inte
 
 📄 Project Snapshot PDF
 
-📃 Resume (Markdown Version)
+📂 GitHub Repo
 
-📫 Contact: shankar.freelance.dataengineer@gmail.com
-
-
-
----
-
-🔗 Live Repos
-
-✅ Main Project Repo
-
-✅ Resume Repo
+📃 Resume available on request
 
 
 
