@@ -35,6 +35,7 @@ Raw Data → Staging Models → Intermediate Models → Mart Models → Business
 
 dbt_project/ │ ├── models/ │   ├── staging/ │   ├── intermediate/ │   ├── marts/ │   └── snapshots/ (planned) │ ├── macros/ ├── seeds/ ├── tests/ ├── dbt_project.yml └── packages.yml
 
+
 ---
 
 ## 📊 Business Use Cases
