@@ -2,6 +2,7 @@
 ![dbt](https://img.shields.io/badge/dbt-Data--Build--Tool-orange)
 ![CI/CD](https://img.shields.io/badge/CI%2FCD-Automation-green)
 ![Status](https://img.shields.io/badge/Project-Completed-brightgreen)
+---
 
 # 🛒 E-commerce ELT Pipeline – Snowflake + dbt
 
@@ -10,6 +11,7 @@ A real-world data engineering project to build a clean, production-grade ELT pip
 ---
 
 ## 🔧 Tech Stack
+
 - **Snowflake** – Data warehouse  
 - **dbt (Data Build Tool)** – Transformation layer  
 - **Git** – Version control & branching  
@@ -21,7 +23,8 @@ A real-world data engineering project to build a clean, production-grade ELT pip
 ---
 
 ## 🔁 ELT Pipeline Flow
-Raw Data → Staging Models → Intermediate Models → Mart Models → Business Dashboards  
+
+Raw Data → Staging Models → Intermediate Models → Mart Models → Business Dashboards
 
 - `staging/` – Cleans and casts raw data  
 - `intermediate/` – Applies joins, metrics logic, and aggregations  
@@ -35,10 +38,10 @@ Raw Data → Staging Models → Intermediate Models → Mart Models → Business
 
 dbt_project/ │ ├── models/ │   ├── staging/ │   ├── intermediate/ │   ├── marts/ │   └── snapshots/ (planned) │ ├── macros/ ├── seeds/ ├── tests/ ├── dbt_project.yml └── packages.yml
 
-
 ---
 
 ## 📊 Business Use Cases
+
 - Identify top customers by **monthly/weekly revenue**  
 - Track product sales trends  
 - Monitor order frequency per customer  
@@ -48,6 +51,7 @@ dbt_project/ │ ├── models/ │   ├── staging/ │   ├── inte
 ---
 
 ## 🧪 Testing & Quality
+
 - dbt built-in tests:
   - `unique`, `not_null`, `relationships`
 - Modular SQL using **Jinja macros**
@@ -63,11 +67,8 @@ dbt_project/ │ ├── models/ │   ├── staging/ │   ├── inte
 📎 Resources
 
 📄 Project Snapshot PDF
-
-📂 Main Project Repo
-
+📂 GitHub Repo
 📃 Resume (Markdown Version)
-
 
 
 ---
