@@ -90,7 +90,7 @@ Resume (Markdown Version)
 I'm Shankar Kamalakannan, a freelance Snowflake + dbt developer focused on delivering clean
 data pipelines with test-driven logic, Git-based CI/CD, and real business alignment.
 
-## Let's Connect Everywhere
+Let's Connect Everywhere
 
 📱 **Mobile:** +91-95976 45086  
 📧 **Email:** [shankar.freelance.dataengineer@gmail.com](mailto:shankar.freelance.dataengineer@gmail.com)  
