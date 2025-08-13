@@ -90,7 +90,10 @@ Resume (Markdown Version)
 I'm Shankar Kamalakannan, a freelance Snowflake + dbt developer focused on delivering clean
 data pipelines with test-driven logic, Git-based CI/CD, and real business alignment.
 
-📱 +91-80566 30490  
-📧 [shankar.freelance.dataengineer@gmail.com](mailto:shankar.freelance.dataengineer@gmail.com)  
+Portfolio: https://tinyurl.com/Shankar-K-Portfolio
+Resume:   https://tinyurl.com/Shankar-Resume-2025
+LinkedIn: https://tinyurl.com/Shankar-Linkedin-2025
+GitHub:   https://tinyurl.com/Shankar-Github-2025
 
-🔗 [GitHub](https://tinyurl.com/Shankar-Github-2025) | [LinkedIn](https://tinyurl.com/Shankar-Linkedin-2025) | [Portfolio](https://tinyurl.com/Shankar-K-Portfolio) | [Resume](https://tinyurl.com/Shankar-Resume-2025)
+Email:    shankar.freelance.dataengineer@gmail.com
+Mobile:   +91-80566 30490
