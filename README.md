@@ -92,9 +92,6 @@ data pipelines with test-driven logic, Git-based CI/CD, and real business alignm
 
 ## Let's Connect Everywhere
 
-📱 **Mobile:** +91-95976 45086  
-📧 **Email:** [shankar.freelance.dataengineer@gmail.com](mailto:shankar.freelance.dataengineer@gmail.com)  
-🔗 **GitHub:** [https://tinyurl.com/Shankar-Github-2025](https://tinyurl.com/Shankar-Github-2025)  
-🔗 **LinkedIn:** [https://tinyurl.com/Shankar-Linkedin-2025](https://tinyurl.com/Shankar-Linkedin-2025)  
-🔗 **Portfolio:** [https://tinyurl.com/Shankar-K-Portfolio](https://tinyurl.com/Shankar-K-Portfolio)  
-🔗 **Resume:** [https://tinyurl.com/Shankar-Resume-2025](https://tinyurl.com/Shankar-Resume-2025)
+📱 Mobile: +91-95976 45086
+📧 Email: shankar.freelance.dataengineer@gmail.com
+🔗 GitHub: https://tinyurl.com/Shankar-Github-2025
