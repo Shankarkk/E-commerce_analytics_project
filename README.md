@@ -91,11 +91,9 @@ I'm Shankar Kamalakannan, a freelance Snowflake + dbt developer focused on deliv
 data pipelines with test-driven logic, Git-based CI/CD, and real business alignment.
 
 Let's Connect Everywhere
-
-Portfolio: 
-Resume:   https://tinyurl.com/Shankar-K-Portfolio
-LinkedIn: https://tinyurl.com/Shankar-Linkedin-2025
-GitHub:   https://tinyurl.com/Shankar-Github-2025
-
-Email:    shankar.freelance.dataengineer@gmail.com
-Mobile:   +91-80566 30490
+📱 Mobile: +91-8056630490
+📧 Email: shankar.freelance.dataengineer@gmail.com
+🔗 GitHub: tinyurl.com/Shankar-Github-2025
+🔗 LinkedIn: tinyurl.com/Shankar-Linkedin-2025
+🔗 Portfolio: tinyurl.com/Shankar-K-Portfolio
+🔗 Resume: tinyurl.com/Shankar-Resume-2025
